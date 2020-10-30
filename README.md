@@ -56,4 +56,14 @@ senão {
 	instruções
 }
 ```
+Semântica: 
+Primeiro executa o trecho de instruções para depois validar se as condições são verdadeiras.
+##### rodea
+Sintaxe:
+```
+rodea (operando . condição . operação) {
+	instruções
+}
+```
+Semântica: 
 
