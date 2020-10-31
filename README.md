@@ -120,16 +120,19 @@ semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os 
 ### Expressões
 ```
 <expr>        -> <declr_strct> <expr> | vazio
-<declr_strct> -> <declr_var> | <calcula> | <amostra> | <pega> | <arrodeia> | <ateque> | <faz_ateque> | <sepa> | <vortiada> | <posar>
+<declr_strct> -> <declr_var> | <calcula> | <amostra> | <pega> 
+| <arrodeia> | <ateque> | <faz_ateque> | <sepa> | <vortiada> | <posar>
 ```
 
 ### Declaração de estruturas
 ```
-<declr_var> -> <tipo> <nome_var> <mais_var>; | <tipo> <nome_var> <mais_var> <atribuir>;
+<declr_var> -> <tipo> <nome_var> <mais_var>; 
+| <tipo> <nome_var> <mais_var> <atribuir>;
 <mais_var>  -> <,> <nome_var> <mais_var> | vazio
 ```
 ```
-<calcula> -> <nome_var> <mais_var> <atr> <op_arit> ; | <nome_var> <sinal_arit> <atr> <VOV> ;
+<calcula> -> <nome_var> <mais_var> <atr> <op_arit> ; 
+| <nome_var> <sinal_arit> <atr> <VOV> ;
 ```
 ```
 <amostra> -> amostra("<str>"); | amostra("<str> <teclado> <str>", <nome_var>);
@@ -138,7 +141,9 @@ semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os 
 <pega> -> pega ( "<teclado>", &<nome_var>);
 ```
 ```
-<arrodeia> -> arrodeia( <declr_var> ; <condição> ; <calcula> ){ <expr> } | arrodeia( <nome_var> <atribuir> ; <condição> ; <calcula> ){ <expr> }  | arrodeia( <nome_var> ; <condição> ; <calcula> ){ <expr> } 
+<arrodeia> -> arrodeia( <declr_var> ; <condição> ; <calcula> ){ <expr> } 
+| arrodeia( <nome_var> <atribuir> ; <condição> ; <calcula> ){ <expr> }  
+| arrodeia( <nome_var> ; <condição> ; <calcula> ){ <expr> } 
 ```
 ```
 <ateque> -> ateque (<condição>) { <expr> }
@@ -147,17 +152,21 @@ semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os 
 <faz_ateque> -> faz{ <expr> }ateque( <condição> );
 ```
 ```
-<sepa> -> sepa(<condição>) { <expr> } | sepa(<condição>) { <expr> } senao <sepa> | sepa(<condição>) { <expr> } senao { <expr> }
+<sepa> -> sepa(<condição>) { <expr> } 
+| sepa(<condição>) { <expr> } senao <sepa> 
+| sepa(<condição>) { <expr> } senao { <expr> }
 ```
 ```
 <vortiada>  -> vortiada( <nome_var> ) { <sinaleiro> <esverdeou> }
-<sinaleiro> -> sinaleiro <str> : <expr> <sinaleiro> | sinaleiro <str> : <expr> pera; <sinaleiro> | vazio
+<sinaleiro> -> sinaleiro <str> : <expr> <sinaleiro> 
+| sinaleiro <str> : <expr> pera; <sinaleiro> | vazio
 <esverdeou> -> esverdeou: <expr> | vazio
 ```
 
 ### Auxiliares das estruturas
 ```
-<atribuir> -> <atr> <valor> | <atr> <Vtrocado> | <atr> <str> | <atr> <nome_var>
+<atribuir> -> <atr> <valor> | <atr> <Vtrocado> 
+| <atr> <str> | <atr> <nome_var>
 <atr>      -> "="
 ```
 ```
@@ -173,7 +182,8 @@ semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os 
 <VOV> -> <valor> | <Vtrocado> | <str> | <nome_var>
 ```
 ```
-<op_arit>    -> <VOV> <sinal_arit> <VOV> <cont> | <VOV> <sinal_arit> <sinal_arit>
+<op_arit>    -> <VOV> <sinal_arit> <VOV> <cont> 
+| <VOV> <sinal_arit> <sinal_arit>
 <cont>       -> <sinal_arit> <VOV> <cont> | vazio
 <sinal_arit> -> + | - | * | /
 ```
@@ -188,10 +198,11 @@ semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os 
 
 ### Tipos de dados
 ```
-<alfabeto> -> "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" |
-     "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" |
-     "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T"
-     "U" | "V" | "W" | "X" | "Y" | "Z"
+<alfabeto> -> "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" 
+| "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" 
+| "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" 
+| "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T"
+| "U" | "V" | "W" | "X" | "Y" | "Z"
 ```
 ```
 <numeral> -> "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
