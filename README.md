@@ -75,12 +75,12 @@ senão {
 Semântica:
 Primeiro executa o trecho de instruções para depois validar se as condições são verdadeiras.
 
-#### rodea
+#### arrodeia
 
 Sintaxe:
 
 ```
-rodea (operando . condição . operação) {
+arrodeia (operando . condição . operação) {
 	instruções
 }
 ```
@@ -108,6 +108,34 @@ pera()
 ```
 
 semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os blocos são indicados pela expressão “sinaleiro”. É necessário que o valor (ou variável) que será testado esteja envolto em parênteses. Os elementos de caso não necessitam estar.
+
+## Especificações
+### Construção de identificadores
+As variaveis são declaradas com a utilização de letras, números e underline. O nome dessas variaveis devem começar com um letra, sensivel à maiuscula e minuscula. O nome da variavel tem um tamanho máximo de 255 caracteres
+A declaração ocorre com a definiçaõ do tipo e, em seguida, o nome. É possivel atrubuir valores para a váriavel após a declaração. Variaveis do mesmo tipo podem ser declaradas na mesma linha, separadas por virgula.
+
+### Estrutura geral do programa
+Para a execução de um código, é necessário apenas um bloco, delimitado pelas chaves que fecham o main (pila dai). A declaração das variáveis podem ser feitas em qualquer parte do bloco, desde que seja feita antes do uso da variável. Cada instrução deve ser finalizada com “ ; ”.
+
+### Palavras reservadas
+| Palavra | Significado     |
+|---------|-----------------|
+| dai | |
+| vorta | |
+| pega | |
+| amostra | |
+| pila | Define um tipo de dado inteiro |  
+| trocado | Define um tipo de dado ponto flutuante de dupla precisão |
+| naipe | Define um tipo de dado cadeia de caracteres |
+| booleano | Define um tipo de dado booleano |
+| sepa | |
+| senao | |
+| rodea | |
+| ateque | |
+| faz_ateque | |
+| vortiada | |
+| sinaleiro | |
+| pera | |
 
 ## EBNF
 ### Programa
