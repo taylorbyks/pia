@@ -94,11 +94,11 @@ Sintaxe:
 ```
 vortiada (condição)
 
-sinaleiro1:
+sinaleiro caso1:
 instrução
 pera()
 
-sinaleiro2:
+sinaleiro caso2:
 instrução
 pera()
 
@@ -120,22 +120,21 @@ Para a execução de um código, é necessário apenas um bloco, delimitado pela
 ### Palavras reservadas
 | Palavra | Significado     |
 |---------|-----------------|
-| dai | |
-| vorta | |
-| pega | |
-| amostra | |
+| dai | Inicio do programa |
+| vorta | Fim do programa |
+| pega | Ler de teclado |
+| amostra | Escrever na tela | 
 | pila | Define um tipo de dado inteiro |  
 | trocado | Define um tipo de dado ponto flutuante de dupla precisão |
 | naipe | Define um tipo de dado cadeia de caracteres |
 | booleano | Define um tipo de dado booleano |
-| sepa | |
-| senao | |
-| rodea | |
-| ateque | |
-| faz_ateque | |
-| vortiada | |
-| sinaleiro | |
-| pera | |
+| sepa | Inicio do condicional do tipo "se" |
+| senao | Inicio do condicional do tipo "senão" |
+| rodea | Inicio do laço de repetição do tipo "para" |
+| ateque | Inicio do laço de repetição do tipo "enquanto" |
+| vortiada | Inicio do condicional do tipo "caso" |
+| sinaleiro | Identificador de caso |
+| pera | Fim da condicional "caso" |
 
 ## EBNF
 ### Programa
