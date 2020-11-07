@@ -1,8 +1,11 @@
-# PIA
+# Paraná Intelligent Application (PIA)
 
-Paraná é uma linguagem de programação baseada em gírias paranaenses.
+Paraná Intelligent Application (PIA) é uma linguagem de programação baseada em gírias paranaenses. Seu nome deriva de uma palavra com origem indígena, muito usada na capital do estado, e que originalmente significava "Coração" mas acabou virando um sinônimo para "menino".
 
 ## Recursos
+
+A PIA é uma mescla da linguagem C e gírias paranaenses. As variáveis podem ser declaradas em qualquer ponto do código, desde que a declaração seja feita antes de serem usadas. A linguagem também conta com duas estruturas de saltos condicionais (sepa-senão e sinaleiro), além de outras duas estruturas de laços de repetição (faz-ateque e rodea). As variáveis serão tipadas (pila, trocado, naipe e booleano), serão permitidas
+funções ( procedimentos podem ser construídos com funções de retorno vazio ).
 
 ## Especificação
 
@@ -107,7 +110,7 @@ instrução
 pera()
 ```
 
-semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os blocos são indicados pela expressão “sinaleiro”. É necessário que o valor (ou variável) que será testado esteja envolto em parênteses. Os elementos de caso não necessitam estar.
+Semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os blocos são indicados pela expressão “sinaleiro”. É necessário que o valor (ou variável) que será testado esteja envolto em parênteses. Os elementos de caso não necessitam estar.
 
 ## Especificações
 ### Construção de identificadores
@@ -122,6 +125,7 @@ Para a execução de um código, é necessário apenas um bloco, delimitado pela
 |---------|-----------------|
 | dai | Inicio do programa |
 | vorta | Fim do programa |
+| nafaixa| Função sem retorno |
 | pega | Ler de teclado |
 | amostra | Escrever na tela | 
 | pila | Define um tipo de dado inteiro |  
