@@ -102,7 +102,7 @@ pera;
 
 Semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os blocos são indicados pela expressão “sinaleiro”. É necessário que o valor (ou variável) que será testado esteja envolto em parênteses. Os elementos de caso não necessitam estar.
 
-###Laços de Repetição
+### Laços de Repetição
 
 São dois os tipos de laço de repetição que podem ser criados:
 
