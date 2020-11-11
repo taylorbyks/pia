@@ -1,6 +1,6 @@
 # Paraná Intelligent Application (PIA)
 
-Paraná Intelligent Application (PIA) é uma linguagem de programação baseada em gírias paranaenses. Seu nome deriva de uma palavra com origem indígena, muito usada na capital do estado, e que originalmente significava "Coração" mas acabou virando um sinônimo para "menino".
+A Paraná Intelligent Application (PIA) é uma linguagem amigável ao programador que se baseia na linguagem C, mas com o diferencial de usar gírias paranaenses. Seu nome deriva de uma palavra com origem indígena, muito usada na capital do estado, e que originalmente significava "Coração" mas acabou virando um sinônimo para "menino".
 
 ## Recursos
 
@@ -102,7 +102,7 @@ pera;
 
 Semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os blocos são indicados pela expressão “sinaleiro”. É necessário que o valor (ou variável) que será testado esteja envolto em parênteses. Os elementos de caso não necessitam estar.
 
-### Laços de Repetição
+###Laços de Repetição
 
 São dois os tipos de laço de repetição que podem ser criados:
 
