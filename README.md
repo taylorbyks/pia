@@ -4,19 +4,19 @@ A Paraná Intelligent Application (PIA) é uma linguagem amigável ao programado
 
 ## Recursos
 
-A PIA é uma mescla da linguagem C e gírias paranaenses. As variáveis podem ser declaradas em qualquer ponto do código, desde que a declaração seja feita antes de serem usadas. A linguagem também conta com duas estruturas de saltos condicionais (sepa-senão e sinaleiro), além de outras duas estruturas de laços de repetição (faz-ateque e arrodeia). As variáveis serão tipadas (pila, trocado, naipe e booleano), serão permitidas funções ( procedimentos podem ser construídos com funções de retorno vazio ).
+A PIA é uma mescla da linguagem C e gírias paranaenses. Todas as instruções presentes em um código escrito em PIA são lidas da esquerda para direita.  As variáveis podem ser declaradas em qualquer ponto do código, desde que a declaração seja feita antes de serem usadas. A linguagem também conta com duas estruturas de saltos condicionais (sepa-senão e sinaleiro), além de outras duas estruturas de laços de repetição (faz-ateque e arrodeia). As variáveis serão tipadas (pila, trocado, naipe e booleano), serão permitidas funções (procedimentos podem ser construídos com funções de retorno vazio).
 
 ## Especificação
 
 ### Tipos de Dados
 
 Os seguintes tipos de dados estão presentes na linguagem:
-| Identificador | Significado     | Descrição                                     |
-|---------------|-----------------|-----------------------------------------------|
-| pila | Tipo de dado inteiro | inteiro sinalizado em complemento de dois de 4 bytes. Se o número for negativo, o símbolo de menos “ - ” deverá ser digitado na frente. |
-| trocado | Tipo de dado ponto flutuante de dupla precisão | Oito bytes, utilizando o padrão IEEE754 |
-| naipe | Tipo de dado cadeia de caracteres | Quatro bytes UTF-8 |
-| booleano | Tipo de dado booleano | Um byte preenchido com zeros ou ums |
+| Identificador | Referência na memória | Significado     | Descrição                                     |
+|---------------|-----------------------|-----------------|-----------------------------------------------|
+| pila | %p | Tipo de dado inteiro | inteiro sinalizado em complemento de dois de 4 bytes. Se o número for negativo, o símbolo de menos “ - ” deverá ser digitado na frente. |
+| trocado | %t | Tipo de dado ponto flutuante de dupla precisão | Oito bytes, utilizando o padrão IEEE754 |
+| naipe | %n | Tipo de dado cadeia de caracteres | Quatro bytes UTF-8 |
+| booleano | %b | Tipo de dado booleano | Um byte preenchido com zeros ou ums |
 
 ### Operadores lógicos, aritméticos e relacionais
 
@@ -24,7 +24,7 @@ Os seguintes tipos de dados estão presentes na linguagem:
 
 Os operadores lógicos têm como entrada dois valores booleanos, com exceção do NOT que é um operador unário, e como saída um valor booleano.
 | Operador | Descrição | Exemplo |
-|----------|-----------------------------------|---------|
+|----------|-----------|---------|
 | && | Operação AND sobre dois operandos | a & b |
 | \|\| | Operação OR sobre dois operandos | a \|\| b |
 | ! | Operação NOT sobre um operando | !a |
@@ -195,14 +195,14 @@ pila dai()
 ```
 <expr>        -> <declr_strct> <expr> | vazio
 <declr_strct> -> <declr_var> | <calcula> | <amostra> | <pega> 
-| <arrodeia> | <ateque> | <faz_ateque> | <sepa> | <vortiada> | <posar>
+| <arrodeia> | <ateque> | <faz_ateque> | <sepa> | <vortiada>
 ```
 
 ### Declaração de estruturas
 ```
 <declr_var> -> <tipo> <nome_var> <mais_var>; 
 | <tipo> <nome_var> <mais_var> <atribuir>;
-<mais_var>  -> <,> <nome_var> <mais_var> | vazio
+<mais_var>  -> ", " <nome_var> <mais_var> | vazio
 ```
 ```
 <calcula> -> <nome_var> <mais_var> <atr> <op_arit> ; 
@@ -239,7 +239,7 @@ pila dai()
 
 ### Auxiliares das estruturas
 ```
-<atribuir> -> <atr> <valor> | <atr> <Vtrocado> 
+<atribuir> -> <atr> <valor> | <atr> <Vtrocado>
 | <atr> <str> | <atr> <nome_var>
 <atr>      -> "="
 ```
@@ -294,5 +294,5 @@ pila dai()
 <valor> -> <numeral> <valor> | <numeral>
 ```
 ```
-<Vtrocado> -> <numeral> <Vtrocado> | <numeral> "." <Vtrocado> | <numeral>
+<Vtrocado> -> <valor> "." <valor> | <valor>
 ```
