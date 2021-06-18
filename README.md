@@ -4,7 +4,7 @@ A Paraná Intelligent Application (PIA) é uma linguagem amigável ao programado
 
 ## Recursos
 
-A PIA é uma mescla da linguagem C e gírias paranaenses. Todas as instruções presentes em um código escrito em PIA são lidas da esquerda para direita.  As variáveis podem ser declaradas em qualquer ponto do código, desde que a declaração seja feita antes de serem usadas. A linguagem também conta com duas estruturas de saltos condicionais (sepa-senão e sinaleiro), além de outras duas estruturas de laços de repetição (faz-ateque e arrodeia). As variáveis serão tipadas (pila, trocado, naipe e booleano), serão permitidas funções (procedimentos podem ser construídos com funções de retorno vazio).
+A PIA é uma mescla da linguagem C e gírias paranaenses. Todas as instruções presentes em um código escrito em PIA são lidas da esquerda para direita.  As variáveis podem ser declaradas em qualquer ponto do código, desde que a declaração seja feita antes de serem usadas. A linguagem também conta com duas estruturas de saltos condicionais (sepa-senão e sinaleiro), além de outras duas estruturas de laços de repetição (faz-ateque e arrodeia). As variáveis serão tipadas (pila, trocado, naipe e creio), serão permitidas funções (procedimentos podem ser construídos com funções de retorno vazio).
 
 ## Especificação
 
@@ -16,7 +16,7 @@ Os seguintes tipos de dados estão presentes na linguagem:
 | pila | %p | Tipo de dado inteiro | inteiro sinalizado em complemento de dois de 4 bytes. Se o número for negativo, o símbolo de menos “ - ” deverá ser digitado na frente. |
 | trocado | %t | Tipo de dado ponto flutuante de dupla precisão | Oito bytes, utilizando o padrão IEEE754 |
 | naipe | %n | Tipo de dado cadeia de caracteres | Quatro bytes UTF-8 |
-| booleano | %b | Tipo de dado booleano | Um byte preenchido com zeros ou ums |
+| creio | %b | Tipo de dado booleano | Um byte preenchido com zeros ou ums |
 
 ### Operadores lógicos, aritméticos e relacionais
 
@@ -152,7 +152,7 @@ Para a execução de um código, é necessário apenas um bloco, delimitado pela
 | pila | Define um tipo de dado inteiro |
 | trocado | Define um tipo de dado ponto flutuante de dupla precisão |
 | naipe | Define um tipo de dado cadeia de caracteres |
-| booleano | Define um tipo de dado booleano |
+| creio | Define um tipo de dado booleano |
 | sepa | Inicio do condicional do tipo "se" |
 | senao | Inicio do condicional do tipo "senão" |
 | arrodeia | Inicio do laço de repetição do tipo "para" |
@@ -282,7 +282,7 @@ pila dai()
 <numeral> -> "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 ```
 ```
-<tipo> -> pila | trocado | booleano | naipe
+<tipo> -> pila | trocado | creio | naipe
 ```
 ```
 <nome_var> -> <alfabeto> <str>
