@@ -25,7 +25,7 @@ Os seguintes tipos de dados estão presentes na linguagem:
 Os operadores lógicos têm como entrada dois valores booleanos, com exceção do NOT que é um operador unário, e como saída um valor booleano.
 | Operador | Descrição | Exemplo |
 |----------|-----------|---------|
-| && | Operação AND sobre dois operandos | a & b |
+| && | Operação AND sobre dois operandos | a && b |
 | \|\| | Operação OR sobre dois operandos | a \|\| b |
 | ! | Operação NOT sobre um operando | !a |
 | ^ | Operação XOR sobre dois operandos | a ^ b |
@@ -84,7 +84,7 @@ Semântica: Primeiro executa o trecho de instruções para depois validar se as 
 
 Sintaxe:
 ```
-vortiada (variável condicionada){
+vortiada (variável condicionada) {
 
 sinaleiro caso1:
 instrução
@@ -123,13 +123,13 @@ Semântica: Definimos o operando como primeiro parâmetro, a condição de parad
 Sintaxe:
 
 ```
-ateque (condição){
+ateque (condição) {
 	instruções
 }
 
-faz{
+faz {
 	instruções
-}ateque(condição);
+} ateque(condição);
 ```
 
 Semântica: Na primeira opção, define-se a condição de parada antes da execução do laço, oque permite a não entrada no laço. Enquanto na segunda opção são executadas as instruções no mínimo 1 vez, para posteriormente verificar a condição de repetição do laço.
@@ -164,8 +164,7 @@ Para a execução de um código, é necessário apenas um bloco, delimitado pela
 
 ### Exemplo de um código escrito em PIA
 ```
-pila dai()
-{
+pila dai() {
     pila VEZES, N = 0;
     trocado A;
     
