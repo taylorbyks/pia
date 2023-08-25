@@ -1,6 +1,5 @@
 # Tokens
 
-Os operadores lógicos têm como entrada dois valores booleanos, com exceção do NOT que é um operador unário, e como saída um valor booleano.
 | Operador | Descrição |
 |----------|-------------------------------------------------------|
 | pila | Tipo de dado inteiro |
