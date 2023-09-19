@@ -28,7 +28,6 @@ Os operadores lógicos têm como entrada dois valores booleanos, com exceção d
 | && | Operação AND sobre dois operandos | a && b |
 | \|\| | Operação OR sobre dois operandos | a \|\| b |
 | ! | Operação NOT sobre um operando | !a |
-| ^ | Operação XOR sobre dois operandos | a ^ b |
 
 #### Aritméticos
 
@@ -39,7 +38,6 @@ Os operadores aritméticos funcionam paras os tipos inteiros e ponto flutuante d
 | - | Subtrai dois operandos | a - b |
 | * | Multiplica dois operandos, da esquerda para a direita | a * b |
 | / | Divide dois operandos, da esquerda pelo da direita | a / b |
-| ** | Eleva o operando da direita ao expoente da esquerda | a **b |
 
 #### Relacionais
 
@@ -79,28 +77,6 @@ senão {
 ```
 
 Semântica: Primeiro executa o trecho de instruções para depois validar se as condições são verdadeiras.
-
-#### Sinaleiro
-
-Sintaxe:
-```
-vortiada (variável condicionada) {
-
-sinaleiro caso1:
-instrução
-pera;
-
-sinaleiro caso2:
-instrução
-
-esverdiou:
-instrução
-pera;
-
-}
-```
-
-Semântica: Dado um valor numérico ou caractere, executa determinado bloco. Os blocos são indicados pela expressão “sinaleiro”. É necessário que o valor (ou variável) que será testado esteja envolto em parênteses. Os elementos de caso não necessitam estar.
 
 ### Laços de Repetição
 
