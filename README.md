@@ -87,7 +87,7 @@ São dois os tipos de laço de repetição que podem ser criados:
 Sintaxe: 
 
 ```
-arrodeia (operando . condição . operação) {
+arrodeia (operando; condição; operação) {
 	instruções
 }
 ```
@@ -102,13 +102,9 @@ Sintaxe:
 ateque (condição) {
 	instruções
 }
-
-faz {
-	instruções
-} ateque(condição);
 ```
 
-Semântica: Na primeira opção, define-se a condição de parada antes da execução do laço, oque permite a não entrada no laço. Enquanto na segunda opção são executadas as instruções no mínimo 1 vez, para posteriormente verificar a condição de repetição do laço.
+Semântica: Definimos a condição de parada antes da execução do laço, o que permite a não entrada no laço
 
 ### Construção de identificadores
 As variaveis são declaradas com a utilização de letras, números e underline. O nome dessas variaveis devem começar com uma letra, insensivel à maiuscula ou minuscula. O nome da variavel tem um tamanho máximo de 255 caracteres
@@ -122,7 +118,6 @@ Para a execução de um código, é necessário apenas um bloco, delimitado pela
 |---------|-----------------|
 | dai | Inicio do programa |
 | vorta | Fim do programa |
-| nafaixa| Função sem retorno |
 | pega | Ler de teclado |
 | amostra | Escrever na tela |
 | pila | Define um tipo de dado inteiro |
@@ -133,10 +128,6 @@ Para a execução de um código, é necessário apenas um bloco, delimitado pela
 | senao | Inicio do condicional do tipo "senão" |
 | arrodeia | Inicio do laço de repetição do tipo "para" |
 | ateque | Inicio do laço de repetição do tipo "enquanto" |
-| faz_ateque | Laço de repetição do tipo "faça_enquanto" |
-| vortiada | Inicio do condicional do tipo "caso" |
-| sinaleiro | Identificador de caso |
-| pera | Fim da condicional "caso" |
 
 ### Exemplo de um código escrito em PIA
 ```
