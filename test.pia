@@ -1,0 +1,16 @@
+pila dai() {
+    pila VEZES, N = 0;
+    trocado A;
+
+    amostra("Digite 5 valores: ");
+
+    arrodeia(VEZES = 0; VEZES<5; VEZES+=1) {
+        pega("%t", A);
+        sepa (A>0){
+        N = N+1;
+        }
+    }
+
+    amostra("%p valores positivos\n", N);
+    vorta 0;
+};
