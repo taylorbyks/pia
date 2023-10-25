@@ -71,7 +71,7 @@ sepa (condição) {
 senao sepa (condição) {
 	instruções
 }
-senão {
+senao {
 	instruções
 }
 ```
@@ -94,7 +94,7 @@ arrodeia (operando; condição; operação) {
 
 Semântica: Definimos o operando como primeiro parâmetro, a condição de parada como segundo e a operação que sera realizada ao final do laço
 
-#### ateque, faz_ateque
+#### ateque
 
 Sintaxe:
 
@@ -197,11 +197,6 @@ F = { <arrodeia>  ::= arrodeia( <arrodeia'> ; <condição> ; <calcula> ){ <expr>
 #### Ateque
 ```
 F = { <ateque> ::= ateque (<condição>) { <expr> }
-}
-```
-#### Faz_Ateque
-```
-F = { <faz_ateque> ::= faz{ <expr> } ateque( <condição> );
 }
 ```
 #### Sepa - Senao
