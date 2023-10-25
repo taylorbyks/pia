@@ -53,7 +53,7 @@ Os operadores relacionais funcionam para os tipos numéricos e booleanos.
 
 ### Atribuição
 
-#### Operador: = 
+#### Operador: =
 Existe apenas um operador de atribuição para variáveis. Consiste em uma operação binária do tipo “a = b”, onde a variável mais à esquerda (a) recebe o valor da variável mais à direita (b), b pode também ter a forma de valor literal, operação matemática ou caractere. As variáveis devem ser do mesmo tipo para que a atribuição seja possível.
 
 ### Saltos Condicionais
@@ -84,7 +84,7 @@ São dois os tipos de laço de repetição que podem ser criados:
 
 #### arrodeia
 
-Sintaxe: 
+Sintaxe:
 
 ```
 arrodeia (operando; condição; operação) {
@@ -134,20 +134,21 @@ Para a execução de um código, é necessário apenas um bloco, delimitado pela
 pila dai() {
     pila VEZES, N = 0;
     trocado A;
-    
+
     amostra ("Digite 5 valores: ");
-    
+
     arrodeia (VEZES = 0; VEZES<5; VEZES+=1) {
         pega("%t", &A);
         sepa (A>0){
         N = N+1;
         }
     }
-    
+
     amostra("%p valores positivos\n", N);
     vorta 0;
 }
 ```
+
 ## BNF
 
 ### Programa
@@ -203,7 +204,7 @@ F = { <ateque> ::= ateque (<condição>) { <expr> }
 ```
 F = { <sepa>  ::= sepa(<condição>) { <expr> } <sepa'>
       <sepa'> ::= senao<senao>
-      <senao> ::= <sepa> | {<expr>} 
+      <senao> ::= <sepa> | {<expr>}
 }
 ```
 
@@ -255,9 +256,9 @@ F = { <op_log>    -> <nome_var> <sinal_log> <nome_var>
 ### Tipos de dados
 #### Alfabeto
 ```
-F = { <alfabeto> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" 
-| "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" 
-| "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" 
+F = { <alfabeto> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j"
+| "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v"
+| "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H"
 | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T"
 | "U" | "V" | "W" | "X" | "Y" | "Z"
 }
@@ -292,3 +293,37 @@ F = { <valor> ::= <numeral> <valor> | <numeral>
 F = { <Vtrocado> ::= <valor> "." <valor> | <valor>
 }
 ```
+
+## Tokens
+
+| Token | Descrição |
+|----------|-------------------------------------------------------|
+| pila | Define um tipo de dado inteiro |
+| trocado | Define um tipo de dado ponto flutuante de dupla precisão |
+| naipe | Define um tipo de dado cadeia de caracteres |
+| creio | Define um tipo de dado booleano |
+| dai | Inicio do programa |
+| vorta | Fim do programa |
+| pega | Ler de teclado |
+| amostra | Escrever na tela |
+| sepa | Inicio do condicional do tipo "se" |
+| senao | Inicio do condicional do tipo "senão" |
+| arrodeia | Inicio do laço de repetição do tipo "para" |
+| ateque | Inicio do laço de repetição do tipo "enquanto" |
+| assign_operator | Operador de atribuição |
+| relational_operator | Operador relacional |
+| logical_operator | Operador lógico |
+| not_operator | Operador de negação |
+| arithmetic_operator | Operador aritmético |
+| multiplier_operator | Operador multiplicador |
+| ( | Abre parênteses |
+| ) | Fecha parênteses |
+| { | Abre chaves |
+| } | Fecha chaves |
+| , | Vírgula |
+| ; | Ponto e vírgula |
+| int | Número inteiro |
+| float | Número de ponto flutuante |
+| bool | Valor booleano |
+| string_literal | Cadeia de caracteres |
+| id | Identificador |

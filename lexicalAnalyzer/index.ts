@@ -1,6 +1,18 @@
 import { tokenize } from './tokenize/tokenize.ts'
 
+const args = Bun.argv
+
+const filePath = args[2]
+
 try {
+  if (!filePath) {
+    throw 'Wrong file path provided'
+  }
+
+  if (filePath.slice(-4) !== '.pia') {
+    throw 'Wrong file extension provided, must be .pia'
+  }
+
   const file = await Bun.file(import.meta.dir + '/test.pia').text()
   const tokens = tokenize(file)
 
