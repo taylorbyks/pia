@@ -149,151 +149,6 @@ pila dai() {
 }
 ```
 
-## BNF
-
-### Programa
-```
-F = { <begin> ::= pila dai {<expr> vorta;}
-}
-```
-
-### Expressões
-```
-F = { <expr>        ::= <declr_strct> <expr> | vazio
-      <declr_strct> ::= <declr_var> | <calcula> | <amostra> | <pega> | <arrodeia> | <ateque> | <faz_ateque> | <sepa> | <vortiada>
-}
-```
-
-### Declaração de estruturas
-#### Variavéis
-```
-F = { <declr_var> ::= <tipo> <nome_var> <mais_var>;
-      <mais_var>  ::= <atribuir> <mais_var'> | vazio
-      <mais_var'> ::= , <nome_var> <atribuir> <mais_var'> | vazio
-}
-```
-#### Calcula
-```
-F = { <calcula> ::= <nome_var><atribuir><op_arit>
-}
-```
-#### Amostra
-```
-F = { <amostra>      ::= amostra("<str><amostra_var> ;
-      <amostra_var>  ::= <teclado><str><amostra_var'> | ")
-      <amostra_var'> ::= ", <nome_var>)
-}
-```
-#### Pega
-```
-F = { <pega> ::= pega("<teclado>", &<nome_var>);
-}
-```
-#### Arrodeia
-```
-F = { <arrodeia>  ::= arrodeia( <arrodeia'> ; <condição> ; <calcula> ){ <expr> }
-      <arrodeia'> ::= <declr_var> | <nome_var> <atribuir>
-}
-```
-#### Ateque
-```
-F = { <ateque> ::= ateque (<condição>) { <expr> }
-}
-```
-#### Sepa - Senao
-```
-F = { <sepa>  ::= sepa(<condição>) { <expr> } <sepa'>
-      <sepa'> ::= senao<senao>
-      <senao> ::= <sepa> | {<expr>}
-}
-```
-
-### Auxiliares das estruturas
-#### Atribuição
-```
-F = { <atribuir>  ::= <atr> <atribuir'> | vazio
-      <atribuir'> ::= <valor> | <Vtrocado>| <str> | <nome_var> | <VOV>
-      <atr>       ::= "="
-}
-```
-#### Teclado
-```
-F = { <teclado>  ::= %<teclado'>
-      <teclado'> ::= p | t | b | n
-}
-```
-#### Condição
-```
-F = { <condição>  ::= op_rel <op_grande>
-      <op_grande> ::= op_log op_rel <op_grande> | vazio
-}
-```
-
-### Operações
-```
-<VOV> ::= <valor> | <Vtrocado> | <str> | <nome_var>
-```
-#### Operação Aritmética
-```
-F = { <op_arit>    ::= <sinal_arit> <VOV> <cont>
-      <cont>       ::= <sinal_arit> <VOV> <cont> | vazio
-      <sinal_arit> ::= + | - | * | / |
-}
-```
-#### Operação Relacional
-```
-F = { <op_rel>    -> <VOV> <sinal_rel> <VOV>
-<sinal_rel> -> "==" | "!=" | ">" | "<" | ">=" | "<="
-}
-```
-#### Operação Lógica
-```
-F = { <op_log>    -> <nome_var> <sinal_log> <nome_var>
-<sinal_log> -> "||" | "&&" | "!" | "^"
-}
-```
-
-### Tipos de dados
-#### Alfabeto
-```
-F = { <alfabeto> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j"
-| "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v"
-| "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H"
-| "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T"
-| "U" | "V" | "W" | "X" | "Y" | "Z"
-}
-```
-#### Numeral
-```
-F = { <numeral> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
-}
-```
-#### Tipos
-```
-F = { <tipo> ::= pila | trocado | creio | naipe
-}
-```
-#### Nome para variaveis
-```
-F = { <nome_var> ::= <alfabeto> <str>
-}
-```
-#### Strings
-```
-F = { <str> ::= <alfabeto> <str> | <numeral> <str> | "_" <str> | vazio
-}
-```
-#### Valor Inteiro
-```
-F = { <valor> ::= <numeral> <valor> | <numeral>
-}
-```
-#### Valor Real
-```
-F = { <Vtrocado> ::= <valor> "." <valor> | <valor>
-}
-```
-
 ## Tokens
 
 | Token | Descrição |
@@ -327,3 +182,293 @@ F = { <Vtrocado> ::= <valor> "." <valor> | <valor>
 | bool | Valor booleano |
 | string_literal | Cadeia de caracteres |
 | id | Identificador |
+
+## Automato
+
+![Automato](automato.jpg)
+
+## Definições Regulares
+
+#### pila
+```
+^pila$
+```
+
+#### trocado
+```
+^trocado$
+```
+
+#### naipe
+```
+^naipe$
+```
+
+#### creio
+```
+^creio$
+```
+
+#### dai
+```
+^dai$
+```
+
+#### vorta
+```
+^vorta$
+```
+
+#### pega
+```
+^pega$
+```
+
+#### amostra
+```
+^amostra$
+```
+#### sepa
+```
+^sepa$
+```
+
+#### senao
+```
+^senao$
+```
+
+#### arrodeia
+```
+^arrodeia$
+```
+
+#### ateque
+```
+^ateque$
+```
+
+#### assign_operator
+```
+^=$
+```
+
+#### relational_operator
+```
+^(<|>|==|!=|>=|<=)$
+```
+
+#### logical_operator
+```
+^(&&|\\|\\|)$
+```
+
+#### not_operator
+```
+^!$
+```
+
+#### arithmetic_operator
+```
+^(\\+|-)$
+```
+
+#### multiplier_operator
+```
+^(\\*|/)$
+```
+
+#### (
+```
+^\\($
+```
+
+#### )
+```
+^\\)$
+```
+
+#### {
+```
+^\\{$
+```
+
+#### }
+```
+^\\}$
+```
+
+#### ,
+```
+^,$
+```
+
+#### ;
+```
+^;$
+```
+
+#### int
+```
+^-?\\d+$
+```
+
+#### float
+```
+^-?\\d+\\.\\d+$
+```
+
+#### bool
+```
+^(verdadeiro|falso)$
+```
+
+#### string_literal
+```
+^\"([^\"\\\\]*(\\\\.[^\"\\\\]*)*)\"$
+```
+
+#### id
+```
+^[a-zA-Z]\\w*$
+```
+
+## BNF
+
+### Programa
+```
+F = { <begin> ::= pila dai {<expr> vorta;}
+}
+```
+
+### Expressões
+```
+F = { <expr>        ::= <declr_strct> <expr> | vazio
+      <declr_strct> ::= <declr_var> | <amostra> | <pega> | <arrodeia> | <ateque> | <sepa>
+}
+```
+
+### Declaração de estruturas
+#### Variavéis
+```
+F = { <declr_var> ::= <tipo> <id> <mais_var>;
+      <mais_var>  ::= <atribuir> <mais_var'> | vazio
+      <mais_var'> ::= , <id> <atribuir> <mais_var'> | vazio
+}
+```
+#### Amostra
+```
+F = { <amostra>      ::= amostra("<str><amostra_var> ;
+      <amostra_var>  ::= <teclado><str><amostra_var'> | ")
+      <amostra_var'> ::= ", <id>)
+}
+```
+#### Pega
+```
+F = { <pega> ::= pega("<teclado>", &<id>);
+}
+```
+#### Arrodeia
+```
+F = { <arrodeia>  ::= arrodeia( <arrodeia'> ; <condição> ){ <expr> }
+      <arrodeia'> ::= <declr_var> | <id> <atribuir>
+}
+```
+#### Ateque
+```
+F = { <ateque> ::= ateque (<condição>) { <expr> }
+}
+```
+#### Sepa - Senao
+```
+F = { <sepa>  ::= sepa(<condição>) { <expr> } <sepa'>
+      <sepa'> ::= senao<senao>
+      <senao> ::= <sepa> | {<expr>}
+}
+```
+
+### Auxiliares das estruturas
+#### Atribuição
+```
+F = { <atribuir>  ::= <assign_operator> <atribuir'> | vazio
+      <atribuir'> ::= <valor> | <Vtrocado>| <str> | <id> | <VOV>
+      <assign_operator>       ::= "="
+}
+```
+#### Teclado
+```
+F = { <teclado>  ::= %<teclado'>
+      <teclado'> ::= p | t | b | n
+}
+```
+#### Condição
+```
+F = { <condição>  ::= relational_operator <op_grande>
+      <op_grande> ::= logical_operator relational_operator <op_grande> | vazio
+}
+```
+
+### Operações
+```
+<VOV> ::= <valor> | <Vtrocado> | <str> | <id>
+```
+#### Operação Aritmética
+```
+F = { <arithmetic_operator>    ::= <sinal_arit> <VOV> <cont>
+      <cont>       ::= <sinal_arit> <VOV> <cont> | vazio
+      <sinal_arit> ::= + | - | * | / |
+}
+```
+#### Operação Relacional
+```
+F = { <relational_operator>    -> <VOV> <sinal_rel> <VOV>
+<sinal_rel> -> "==" | "!=" | ">" | "<" | ">=" | "<="
+}
+```
+#### Operação Lógica
+```
+F = { <logical_operator>    -> <id> <sinal_log> <id>
+<sinal_log> -> "||" | "&&" | "!" | "^"
+}
+```
+
+### Tipos de dados
+#### Alfabeto
+```
+F = { <alfabeto> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j"
+| "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v"
+| "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H"
+| "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T"
+| "U" | "V" | "W" | "X" | "Y" | "Z"
+}
+```
+#### Numeral
+```
+F = { <numeral> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+}
+```
+#### Tipos
+```
+F = { <tipo> ::= pila | trocado | creio | naipe
+}
+```
+#### Nome para variaveis
+```
+F = { <id> ::= <alfabeto> <str>
+}
+```
+#### Strings
+```
+F = { <str> ::= <alfabeto> <str> | <numeral> <str> | "_" <str> | vazio
+}
+```
+#### Valor Inteiro
+```
+F = { <valor> ::= <numeral> <valor> | <numeral>
+}
+```
+#### Valor Real
+```
+F = { <Vtrocado> ::= <valor> "." <valor> | <valor>
+}
+```
