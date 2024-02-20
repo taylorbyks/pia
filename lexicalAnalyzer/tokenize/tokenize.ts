@@ -4,7 +4,7 @@ const convertRegex = (pattern: string) => new RegExp(pattern)
 
 const spliter = (code: string) =>
   code
-    .split(/(".*?"|'.*?'|\/\*[\s\S]*?\*\/|\/\/.*|\/[^\/\n]*\/|[a-zA-Z_]\w*|\d+|[^\s])/g)
+    .split(/(".*?"|'.*?'|\/\*[\s\S]*?\*\/|\/\/.*|\/[^\/\n]*\/|[a-zA-Z_]\w*|\d+|==|!=|<=|>=|&&|\|\||[^\s])/g)
     .filter((token) => token.trim() !== '')
 
 const regexTokens = Object.entries(tokens).reduce((acc, [name, pattern]) => {

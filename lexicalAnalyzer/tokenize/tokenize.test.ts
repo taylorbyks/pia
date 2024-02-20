@@ -111,3 +111,42 @@ test('should show error when have an unexpected token', () => {
 
   expect(() => tokenize(sourceCode)).toThrow('Error: Unexpected token _a')
 })
+
+test('should tokenize a program with a relational_operator ==', () => {
+  const sourceCode = '1 == 1;'
+  const tokens = tokenize(sourceCode)
+
+  expect(tokens).not.toBeNull()
+  expect(tokens).toEqual([
+    { type: 'int', value: '1' },
+    { type: 'relational_operator', value: '==' },
+    { type: 'int', value: '1' },
+    { type: ';', value: ';' },
+  ])
+})
+
+test('should tokenize a program with a relational_operator <=', () => {
+  const sourceCode = '1 <= 1;'
+  const tokens = tokenize(sourceCode)
+
+  expect(tokens).not.toBeNull()
+  expect(tokens).toEqual([
+    { type: 'int', value: '1' },
+    { type: 'relational_operator', value: '<=' },
+    { type: 'int', value: '1' },
+    { type: ';', value: ';' },
+  ])
+})
+
+test('should tokenize a program with a relational_operator !=', () => {
+  const sourceCode = '1 != 1;'
+  const tokens = tokenize(sourceCode)
+
+  expect(tokens).not.toBeNull()
+  expect(tokens).toEqual([
+    { type: 'int', value: '1' },
+    { type: 'relational_operator', value: '!=' },
+    { type: 'int', value: '1' },
+    { type: ';', value: ';' },
+  ])
+})
