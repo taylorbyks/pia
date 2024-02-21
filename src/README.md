@@ -1,4 +1,4 @@
-# Paraná Intelligent Application (PIA) - Lexical Analyzer
+# Paraná Intelligent Application (PIA) - Compiler
 
 ## Requirements
 
@@ -19,7 +19,7 @@ bun install
 Run the following command, replacing `<file.pia>` with the path to the file you want to analyze.
 
 ```bash
-bun run lexicalAnalyzer <file.pia>
+bun run compile <file.pia>
 ```
 You should see the output in the terminal.
 

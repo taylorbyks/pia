@@ -1,12 +1,14 @@
 {
-  "name": "pia",
+  "name": "pia-lexer",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
     "bun-types": "latest"
   },
   "scripts": {
-    "lexicalAnalyzer": "bun index.ts"
+    "lexer": "bun lexer/index.ts",
+    "parser": "bun parser/index.ts",
+    "compile": "bun index.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

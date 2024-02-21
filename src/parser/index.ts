@@ -1,4 +1,5 @@
-import { tokenize } from './tokenize/tokenize.ts'
+import { lexer } from '../lexer/lexer.ts'
+import { parser } from './parser.ts'
 
 const args = Bun.argv
 
@@ -13,14 +14,15 @@ try {
     throw 'Wrong file extension provided, must be .pia'
   }
 
-  const file = await Bun.file(import.meta.dir + '/test.pia').text()
-  const tokens = tokenize(file)
+  const file = await Bun.file(filePath).text()
+  const tokens = lexer(file)
+  const result = parser(tokens)
 
   console.log('Source code:')
   console.log(file)
   console.log('')
-  console.log('Tokens:')
-  console.log(tokens.map((token) => ` ${token.type}: ${token.value}`).join('\n'))
+  console.log('Result:')
+  console.log(result)
 } catch (error) {
   console.error(error)
 }

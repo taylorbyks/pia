@@ -416,7 +416,7 @@ F = { <condição>  ::= relational_operator <op_grande>
 ```
 F = { <arithmetic_operator>    ::= <sinal_arit> <VOV> <cont>
       <cont>       ::= <sinal_arit> <VOV> <cont> | vazio
-      <sinal_arit> ::= + | - | * | / |
+      <sinal_arit> ::= + | - | * | /
 }
 ```
 #### Operação Relacional

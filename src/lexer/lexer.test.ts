@@ -1,9 +1,9 @@
 import { expect, test } from 'bun:test'
-import { tokenize } from './tokenize.ts'
+import { lexer } from './lexer.ts'
 
 test('should tokenize a simple program correctly', () => {
   const sourceCode = 'foo + bar;'
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
@@ -16,7 +16,7 @@ test('should tokenize a simple program correctly', () => {
 
 test('should tokenize a program with a string literal correctly', () => {
   const sourceCode = 'foo + "bar";'
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
@@ -29,7 +29,7 @@ test('should tokenize a program with a string literal correctly', () => {
 
 test('should tokenize a program with a string literal with delimiter correctly', () => {
   const sourceCode = 'foo + "bar()";'
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
@@ -42,7 +42,7 @@ test('should tokenize a program with a string literal with delimiter correctly',
 
 test('should tokenize a program with a keyword correctly', () => {
   const sourceCode = 'pila var = 1;'
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
@@ -56,7 +56,7 @@ test('should tokenize a program with a keyword correctly', () => {
 
 test('should tokenize a program with a keyword correctly', () => {
   const sourceCode = '1 + 2 * 3;'
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
@@ -78,7 +78,7 @@ test('should tokenize a program with a keyword correctly', () => {
     vorta 0;
   }
   `
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
@@ -109,12 +109,12 @@ test('should show error when have an unexpected token', () => {
   pila _a = 1;
   `
 
-  expect(() => tokenize(sourceCode)).toThrow('Error: Unexpected token _a')
+  expect(() => lexer(sourceCode)).toThrow('Error: Unexpected token _a')
 })
 
 test('should tokenize a program with a relational_operator ==', () => {
   const sourceCode = '1 == 1;'
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
@@ -127,7 +127,7 @@ test('should tokenize a program with a relational_operator ==', () => {
 
 test('should tokenize a program with a relational_operator <=', () => {
   const sourceCode = '1 <= 1;'
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
@@ -140,13 +140,26 @@ test('should tokenize a program with a relational_operator <=', () => {
 
 test('should tokenize a program with a relational_operator !=', () => {
   const sourceCode = '1 != 1;'
-  const tokens = tokenize(sourceCode)
+  const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'int', value: '1' },
     { type: 'relational_operator', value: '!=' },
     { type: 'int', value: '1' },
+    { type: ';', value: ';' },
+  ])
+})
+
+test('should tokenize a program with a float number', () => {
+  const sourceCode = 'trocado = 1.2;'
+  const tokens = lexer(sourceCode)
+
+  expect(tokens).not.toBeNull()
+  expect(tokens).toEqual([
+    { type: 'trocado', value: 'trocado' },
+    { type: 'assign_operator', value: '=' },
+    { type: 'float', value: '1.2' },
     { type: ';', value: ';' },
   ])
 })
