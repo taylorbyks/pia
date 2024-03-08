@@ -1,5 +1,5 @@
 pila dai() {
-    pila VEZES, N = 0;
+    pila VEZES = 0, N = 0; 
     trocado A;
 
     amostra("Digite 5 valores: ");
@@ -12,5 +12,5 @@ pila dai() {
     }
 
     amostra("%p valores positivos\n", N);
-    vorta 0;
+    vorta;
 };

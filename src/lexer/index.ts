@@ -20,7 +20,7 @@ try {
   console.log(file)
   console.log('')
   console.log('Tokens:')
-  console.log(tokens.map((token) => ` ${token.type}: ${token.value}`).join('\n'))
+  console.log(tokens)
 } catch (error) {
   console.error(error)
 }
