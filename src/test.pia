@@ -4,8 +4,8 @@ pila dai() {
 
     amostra("Digite 5 valores: ");
 
-    arrodeia(VEZES = 0; VEZES<5; VEZES+=1) {
-        pega("%t", A);
+    arrodeia(VEZES = 0; VEZES<5) {
+        pega(A);
         sepa (A>0){
         N = N+1;
         }
