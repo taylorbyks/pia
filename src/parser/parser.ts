@@ -18,9 +18,6 @@ const parser = (tokens: Token[]) => {
     const currentState = stack[stack.length - 1][1]
     const nextState = table[currentState][currentToken.type]
 
-    console.log('Stack:', stack)
-    console.log({currentToken, currentState, nextState})
-
     if (nextState === '') {
       throw `Error: Unexpected token ${currentToken.value}`
     }

@@ -280,14 +280,12 @@ test('should parse simple program correctly', () => {
     },
   ]
 
-  try {
-    parser(tokens)
-  } catch (error) {
-    expect(error).toEqual('Error: Unexpected token foo')
-  }
+  const result = parser(tokens)
+
+  expect(result).toEqual('Accepted')
 })
 
-test.skip('should parse simple program correctly', () => {
+test('should parse simple program correctly', () => {
   const tokens = [
     {
       type: 'pila',
