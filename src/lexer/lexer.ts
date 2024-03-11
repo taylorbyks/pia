@@ -5,8 +5,8 @@ const convertRegex = (pattern: string) => new RegExp(pattern)
 
 const spliter = (code: string) =>
   code
-    .split(/(".*?"|'.*?'|\/\*[\s\S]*?\*\/|\/\/.*|\/[^\/\n]*\/|[a-zA-Z_]\w*|\d|==|!=|<=|>=|&&|\|\||[^\s])/g)
-    .filter((token) => token.trim() !== '')
+    .split(/(".*?"|'.*?'|\/\*[\s\S]*?\*\/|\/\/.*|\/[^\/\n]*\/|[a-zA-Z_]\w*|-?\d*\.?\d+|==|!=|<=|>=|&&|\|\||[^\s])/g)
+    .filter((token) => token !== undefined && token.trim() !== '')
 
 const regexTokens = Object.entries(tokens).reduce((acc, [name, pattern]) => {
   acc[name] = convertRegex(pattern)
@@ -29,6 +29,11 @@ const lexer = (code: string) => {
     if (!tokenType) {
       throw `Error: Unexpected token ${token}`
     }
+  })
+
+  result.push({
+    type: 'EOF',
+    value: 'EOF',
   })
 
   return result

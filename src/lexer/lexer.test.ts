@@ -8,9 +8,10 @@ test('should tokenize a simple program correctly', () => {
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'id', value: 'foo' },
-    { type: 'arithmetic_operator', value: '+' },
+    { type: 'arithmeticoperator', value: '+' },
     { type: 'id', value: 'bar' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
@@ -21,9 +22,10 @@ test('should tokenize a program with a string literal correctly', () => {
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'id', value: 'foo' },
-    { type: 'arithmetic_operator', value: '+' },
-    { type: 'string_literal', value: '"bar"' },
+    { type: 'arithmeticoperator', value: '+' },
+    { type: 'stringliteral', value: '"bar"' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
@@ -34,9 +36,10 @@ test('should tokenize a program with a string literal with delimiter correctly',
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'id', value: 'foo' },
-    { type: 'arithmetic_operator', value: '+' },
-    { type: 'string_literal', value: '"bar()"' },
+    { type: 'arithmeticoperator', value: '+' },
+    { type: 'stringliteral', value: '"bar()"' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
@@ -48,9 +51,10 @@ test('should tokenize a program with a keyword correctly', () => {
   expect(tokens).toEqual([
     { type: 'pila', value: 'pila' },
     { type: 'id', value: 'var' },
-    { type: 'assign_operator', value: '=' },
+    { type: 'assignoperator', value: '=' },
     { type: 'int', value: '1' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
@@ -61,11 +65,12 @@ test('should tokenize a program with a keyword correctly', () => {
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'int', value: '1' },
-    { type: 'arithmetic_operator', value: '+' },
+    { type: 'arithmeticoperator', value: '+' },
     { type: 'int', value: '2' },
-    { type: 'multiplier_operator', value: '*' },
+    { type: 'multiplieroperator', value: '*' },
     { type: 'int', value: '3' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
@@ -91,7 +96,7 @@ test('should tokenize a program with a keyword correctly', () => {
     { type: 'id', value: 'VEZES' },
     { type: ',', value: ',' },
     { type: 'id', value: 'N' },
-    { type: 'assign_operator', value: '=' },
+    { type: 'assignoperator', value: '=' },
     { type: 'int', value: '0' },
     { type: ';', value: ';' },
     { type: 'trocado', value: 'trocado' },
@@ -101,10 +106,11 @@ test('should tokenize a program with a keyword correctly', () => {
     { type: 'int', value: '0' },
     { type: ';', value: ';' },
     { type: '}', value: '}' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
-test('should show error when have an unexpected token', () => {
+test('should show error when have an unexpected token _', () => {
   const sourceCode = `
   pila _a = 1;
   `
@@ -112,42 +118,45 @@ test('should show error when have an unexpected token', () => {
   expect(() => lexer(sourceCode)).toThrow('Error: Unexpected token _a')
 })
 
-test('should tokenize a program with a relational_operator ==', () => {
+test('should tokenize a program with a relationaloperator ==', () => {
   const sourceCode = '1 == 1;'
   const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'int', value: '1' },
-    { type: 'relational_operator', value: '==' },
+    { type: 'relationaloperator', value: '==' },
     { type: 'int', value: '1' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
-test('should tokenize a program with a relational_operator <=', () => {
+test('should tokenize a program with a relationaloperator <=', () => {
   const sourceCode = '1 <= 1;'
   const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'int', value: '1' },
-    { type: 'relational_operator', value: '<=' },
+    { type: 'relationaloperator', value: '<=' },
     { type: 'int', value: '1' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
-test('should tokenize a program with a relational_operator !=', () => {
+test('should tokenize a program with a relationaloperator !=', () => {
   const sourceCode = '1 != 1;'
   const tokens = lexer(sourceCode)
 
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'int', value: '1' },
-    { type: 'relational_operator', value: '!=' },
+    { type: 'relationaloperator', value: '!=' },
     { type: 'int', value: '1' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
 
@@ -158,8 +167,9 @@ test('should tokenize a program with a float number', () => {
   expect(tokens).not.toBeNull()
   expect(tokens).toEqual([
     { type: 'trocado', value: 'trocado' },
-    { type: 'assign_operator', value: '=' },
+    { type: 'assignoperator', value: '=' },
     { type: 'float', value: '1.2' },
     { type: ';', value: ';' },
+    { type: 'EOF', value: 'EOF' },
   ])
 })
