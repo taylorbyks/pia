@@ -14,9 +14,12 @@ const parser = (tokens: Token[]) => {
     ],
   ]
 
-  while (tokens.length > 0) {
+  while (currentToken) {
     const currentState = stack[stack.length - 1][1]
     const nextState = table[currentState][currentToken.type]
+
+    console.log('Stack:', stack)
+    console.log({currentToken, currentState, nextState})
 
     if (nextState === '') {
       throw `Error: Unexpected token ${currentToken.value}`
@@ -28,7 +31,9 @@ const parser = (tokens: Token[]) => {
 
     if (nextState.includes('shift')) {
       stack.push([currentToken, nextState.split(' ')[1]])
+
       currentToken = tokens.shift()
+
     }
 
     if (nextState.includes('reduce')) {

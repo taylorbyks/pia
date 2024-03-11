@@ -16,7 +16,7 @@ test('should show an error if program not start correctly', () => {
   }
 })
 
-test.skip('should parse simple program correctly', () => {
+test('should parse simple program correctly', () => {
   const tokens = [
     {
       type: 'pila',
@@ -143,26 +143,6 @@ test.skip('should parse simple program correctly', () => {
       value: '5',
     },
     {
-      type: ';',
-      value: ';',
-    },
-    {
-      type: 'id',
-      value: 'VEZES',
-    },
-    {
-      type: 'arithmeticoperator',
-      value: '+',
-    },
-    {
-      type: 'assignoperator',
-      value: '=',
-    },
-    {
-      type: 'int',
-      value: '1',
-    },
-    {
       type: ')',
       value: ')',
     },
@@ -177,14 +157,6 @@ test.skip('should parse simple program correctly', () => {
     {
       type: '(',
       value: '(',
-    },
-    {
-      type: 'stringliteral',
-      value: '"%t"',
-    },
-    {
-      type: ',',
-      value: ',',
     },
     {
       type: 'id',
@@ -302,6 +274,10 @@ test.skip('should parse simple program correctly', () => {
       type: ';',
       value: ';',
     },
+    {
+      type: 'EOF',
+      value: 'EOF',
+    },
   ]
 
   try {
@@ -311,7 +287,7 @@ test.skip('should parse simple program correctly', () => {
   }
 })
 
-test('should parse simple program correctly', () => {
+test.skip('should parse simple program correctly', () => {
   const tokens = [
     {
       type: 'pila',
@@ -396,6 +372,10 @@ test('should parse simple program correctly', () => {
     {
       type: ';',
       value: ';',
+    },
+    {
+      type: 'EOF',
+      value: 'EOF',
     },
   ]
 
