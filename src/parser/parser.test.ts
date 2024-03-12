@@ -16,7 +16,7 @@ test('should show an error if program not start correctly', () => {
   }
 })
 
-test('should parse simple program correctly', () => {
+test('should parse simple program with arrodeia correctly', () => {
   const tokens = [
     {
       type: 'pila',
@@ -285,7 +285,80 @@ test('should parse simple program correctly', () => {
   expect(result).toEqual('Accepted')
 })
 
-test('should parse simple program correctly', () => {
+test('should parse simple program with one operation correctly', () => {
+  const tokens = [
+    {
+      type: 'pila',
+      value: 'pila',
+    },
+    {
+      type: 'dai',
+      value: 'dai',
+    },
+    {
+      type: '(',
+      value: '(',
+    },
+    {
+      type: ')',
+      value: ')',
+    },
+    {
+      type: '{',
+      value: '{',
+    },
+    {
+      type: 'id',
+      value: 'N',
+    },
+    {
+      type: 'assignoperator',
+      value: '=',
+    },
+    {
+      type: 'id',
+      value: 'N',
+    },
+    {
+      type: 'arithmeticoperator',
+      value: '+',
+    },
+    {
+      type: 'int',
+      value: '1',
+    },
+    {
+      type: ';',
+      value: ';',
+    },
+    {
+      type: 'vorta',
+      value: 'vorta',
+    },
+    {
+      type: ';',
+      value: ';',
+    },
+    {
+      type: '}',
+      value: '}',
+    },
+    {
+      type: ';',
+      value: ';',
+    },
+    {
+      type: 'EOF',
+      value: 'EOF',
+    },
+  ]
+
+  const result = parser(tokens)
+
+  expect(result).toEqual('Accepted')
+})
+
+test('should parse simple program declaring vars correctly', () => {
   const tokens = [
     {
       type: 'pila',

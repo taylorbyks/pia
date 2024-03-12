@@ -4,6 +4,8 @@ import grammar from './grammar.json'
 
 const parser = (tokens: Token[]) => {
   let currentToken = tokens.shift()
+  const syntaxTree = { type: 'Program', children: [] }
+  const errors: string[] = []
   const stack = [
     [
       {
@@ -19,6 +21,7 @@ const parser = (tokens: Token[]) => {
     const nextState = table[currentState][currentToken.type]
 
     if (nextState === '') {
+      errors.push(`Error: Unexpected token ${currentToken.value}`)
       throw `Error: Unexpected token ${currentToken.value}`
     }
 
@@ -30,24 +33,28 @@ const parser = (tokens: Token[]) => {
       stack.push([currentToken, nextState.split(' ')[1]])
 
       currentToken = tokens.shift()
-
     }
 
     if (nextState.includes('reduce')) {
       const ruleNumber = nextState.split(' ')[1]
       const [rule, production] = grammar[ruleNumber].split('->')
 
+
+      const node = { type: rule, children: [] }
       for (let i = 0; i < production.split(' ').length; i++) {
-        stack.pop()
+        node.children.push(stack.pop()[0])
       }
+      node.children = node.children.reverse()
+      const parentState = stack[stack.length - 1][1]
+      const parentNextState = table[parentState][rule]
 
-      const state = stack[stack.length - 1][1]
+      stack.push([{ type: rule, value: production }, table[parentState][rule]])
 
-      stack.push([{ type: rule, value: production }, table[state][rule]])
+      syntaxTree.children.push(node)
     }
   }
 
-  return 'Rejected'
+  return errors
 }
 
 export { parser }
