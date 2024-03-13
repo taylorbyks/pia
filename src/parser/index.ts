@@ -1,4 +1,5 @@
 import { lexer } from '../lexer/lexer.ts'
+import { parser } from './parser.ts'
 
 const args = Bun.argv
 
