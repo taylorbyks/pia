@@ -18,14 +18,30 @@ const parser = (tokens: Token[]) => {
 
   while (currentToken) {
     const currentState = stack[stack.length - 1][1]
-    const nextState = table[currentState][currentToken.type]
+    let nextState = table[currentState][currentToken.type]
 
     if (nextState === '') {
       errors.push(`Error: Unexpected token ${currentToken.value}`)
-      throw `Error: Unexpected token ${currentToken.value}`
+
+      const reduceState = Object.keys(table[currentState]).find((key) => table[currentState][key].includes('reduce'))
+      const shiftState = Object.keys(table[currentState]).find((key) => table[currentState][key].includes('shift'))
+
+      if (reduceState) {
+        nextState = table[currentState][reduceState]
+      }
+
+      if (!reduceState && shiftState) {
+        tokens.unshift(currentToken)
+        currentToken = { type: shiftState, value: '' }
+        continue
+      }
     }
 
     if (nextState === 'accept') {
+      if (errors.length > 0) {
+        return `Rejected ${errors.join('\n')}`
+      }
+
       return 'Accepted'
     }
 
@@ -38,7 +54,6 @@ const parser = (tokens: Token[]) => {
     if (nextState.includes('reduce')) {
       const ruleNumber = nextState.split(' ')[1]
       const [rule, production] = grammar[ruleNumber].split('->')
-
 
       const node = { type: rule, children: [] }
       for (let i = 0; i < production.split(' ').length; i++) {
@@ -54,7 +69,7 @@ const parser = (tokens: Token[]) => {
     }
   }
 
-  return errors
+  return `Rejected ${errors.join('\n')}`
 }
 
 export { parser }
