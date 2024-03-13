@@ -4,14 +4,14 @@ A Paraná Intelligent Application (PIA) é uma linguagem amigável ao programado
 
 ## Recursos
 
-A PIA é uma mescla da linguagem C e gírias paranaenses. Todas as instruções presentes em um código escrito em PIA são lidas da esquerda para direita.  As variáveis podem ser declaradas em qualquer ponto do código, desde que a declaração seja feita antes de serem usadas. A linguagem também conta com duas estruturas de saltos condicionais (sepa-senão e sinaleiro), além de outras duas estruturas de laços de repetição (faz-ateque e arrodeia). As variáveis serão tipadas (pila, trocado, naipe e creio), serão permitidas funções (procedimentos podem ser construídos com funções de retorno vazio).
+A PIA é uma mescla da linguagem C e gírias paranaenses. Todas as instruções presentes em um código escrito em PIA são lidas da esquerda para direita. As variáveis podem ser declaradas em qualquer ponto do código, desde que a declaração seja feita antes de serem usadas. A linguagem também conta com duas estruturas de saltos condicionais (sepa-senão e sinaleiro), além de outras duas estruturas de laços de repetição (faz-ateque e arrodeia). As variáveis serão tipadas (pila, trocado, naipe e creio), serão permitidas funções (procedimentos podem ser construídos com funções de retorno vazio).
 
 ## Especificação
 
 ### Tipos de Dados
 
 Os seguintes tipos de dados estão presentes na linguagem:
-| Identificador | Referência na memória | Significado     | Descrição                                     |
+| Identificador | Referência na memória | Significado | Descrição |
 |---------------|-----------------------|-----------------|-----------------------------------------------|
 | pila | %p | Tipo de dado inteiro | inteiro sinalizado em complemento de dois de 4 bytes. Se o número for negativo, o símbolo de menos “ - ” deverá ser digitado na frente. |
 | trocado | %t | Tipo de dado ponto flutuante de dupla precisão | Oito bytes, utilizando o padrão IEEE754 |
@@ -54,6 +54,7 @@ Os operadores relacionais funcionam para os tipos numéricos e booleanos.
 ### Atribuição
 
 #### Operador: =
+
 Existe apenas um operador de atribuição para variáveis. Consiste em uma operação binária do tipo “a = b”, onde a variável mais à esquerda (a) recebe o valor da variável mais à direita (b), b pode também ter a forma de valor literal, operação matemática ou caractere. As variáveis devem ser do mesmo tipo para que a atribuição seja possível.
 
 ### Saltos Condicionais
@@ -107,29 +108,33 @@ ateque (condição) {
 Semântica: Definimos a condição de parada antes da execução do laço, o que permite a não entrada no laço
 
 ### Construção de identificadores
+
 As variaveis são declaradas com a utilização de letras, números e underline. O nome dessas variaveis devem começar com uma letra, insensivel à maiuscula ou minuscula. O nome da variavel tem um tamanho máximo de 255 caracteres
 A declaração ocorre com a definição do tipo e, em seguida, o nome. É possivel atrubuir valores para a váriavel após a declaração. Variaveis do mesmo tipo podem ser declaradas na mesma linha, separadas por virgula.
 
 ### Estrutura geral do programa
+
 Para a execução de um código, é necessário apenas um bloco, delimitado pelas chaves que fecham o main (pila dai). A declaração das variáveis podem ser feitas em qualquer parte do bloco, desde que seja feita antes do uso da variável. Cada instrução deve ser finalizada com “ ; ”.
 
 ### Palavras reservadas
-| Palavra | Significado     |
-|---------|-----------------|
-| dai | Inicio do programa |
-| vorta | Fim do programa |
-| pega | Ler de teclado |
-| amostra | Escrever na tela |
-| pila | Define um tipo de dado inteiro |
-| trocado | Define um tipo de dado ponto flutuante de dupla precisão |
-| naipe | Define um tipo de dado cadeia de caracteres |
-| creio | Define um tipo de dado booleano |
-| sepa | Inicio do condicional do tipo "se" |
-| senao | Inicio do condicional do tipo "senão" |
-| arrodeia | Inicio do laço de repetição do tipo "para" |
-| ateque | Inicio do laço de repetição do tipo "enquanto" |
+
+| Palavra  | Significado                                              |
+| -------- | -------------------------------------------------------- |
+| dai      | Inicio do programa                                       |
+| vorta    | Fim do programa                                          |
+| pega     | Ler de teclado                                           |
+| amostra  | Escrever na tela                                         |
+| pila     | Define um tipo de dado inteiro                           |
+| trocado  | Define um tipo de dado ponto flutuante de dupla precisão |
+| naipe    | Define um tipo de dado cadeia de caracteres              |
+| creio    | Define um tipo de dado booleano                          |
+| sepa     | Inicio do condicional do tipo "se"                       |
+| senao    | Inicio do condicional do tipo "senão"                    |
+| arrodeia | Inicio do laço de repetição do tipo "para"               |
+| ateque   | Inicio do laço de repetição do tipo "enquanto"           |
 
 ### Exemplo de um código escrito em PIA
+
 ```
 pila dai() {
     pila VEZES, N = 0;
@@ -151,37 +156,37 @@ pila dai() {
 
 ## Tokens
 
-| Token | Descrição |
-|----------|-------------------------------------------------------|
-| pila | Define um tipo de dado inteiro |
-| trocado | Define um tipo de dado ponto flutuante de dupla precisão |
-| naipe | Define um tipo de dado cadeia de caracteres |
-| creio | Define um tipo de dado booleano |
-| dai | Inicio do programa |
-| vorta | Fim do programa |
-| pega | Ler de teclado |
-| amostra | Escrever na tela |
-| sepa | Inicio do condicional do tipo "se" |
-| senao | Inicio do condicional do tipo "senão" |
-| arrodeia | Inicio do laço de repetição do tipo "para" |
-| ateque | Inicio do laço de repetição do tipo "enquanto" |
-| assign_operator | Operador de atribuição |
-| relational_operator | Operador relacional |
-| logical_operator | Operador lógico |
-| not_operator | Operador de negação |
-| arithmetic_operator | Operador aritmético |
-| multiplier_operator | Operador multiplicador |
-| ( | Abre parênteses |
-| ) | Fecha parênteses |
-| { | Abre chaves |
-| } | Fecha chaves |
-| , | Vírgula |
-| ; | Ponto e vírgula |
-| int | Número inteiro |
-| float | Número de ponto flutuante |
-| bool | Valor booleano |
-| string_literal | Cadeia de caracteres |
-| id | Identificador |
+| Token              | Descrição                                                |
+| ------------------ | -------------------------------------------------------- |
+| pila               | Define um tipo de dado inteiro                           |
+| trocado            | Define um tipo de dado ponto flutuante de dupla precisão |
+| naipe              | Define um tipo de dado cadeia de caracteres              |
+| creio              | Define um tipo de dado booleano                          |
+| dai                | Inicio do programa                                       |
+| vorta              | Fim do programa                                          |
+| pega               | Ler de teclado                                           |
+| amostra            | Escrever na tela                                         |
+| sepa               | Inicio do condicional do tipo "se"                       |
+| senao              | Inicio do condicional do tipo "senão"                    |
+| arrodeia           | Inicio do laço de repetição do tipo "para"               |
+| ateque             | Inicio do laço de repetição do tipo "enquanto"           |
+| assignoperator     | Operador de atribuição                                   |
+| relationaloperator | Operador relacional                                      |
+| logicaloperator    | Operador lógico                                          |
+| notoperator        | Operador de negação                                      |
+| arithmeticoperator | Operador aritmético                                      |
+| multiplieroperator | Operador multiplicador                                   |
+| (                  | Abre parênteses                                          |
+| )                  | Fecha parênteses                                         |
+| {                  | Abre chaves                                              |
+| }                  | Fecha chaves                                             |
+| ,                  | Vírgula                                                  |
+| ;                  | Ponto e vírgula                                          |
+| int                | Número inteiro                                           |
+| float              | Número de ponto flutuante                                |
+| bool               | Valor booleano                                           |
+| stringliteral      | Cadeia de caracteres                                     |
+| id                 | Identificador                                            |
 
 ## Automato
 
@@ -190,145 +195,175 @@ pila dai() {
 ## Definições Regulares
 
 #### pila
+
 ```
 ^pila$
 ```
 
 #### trocado
+
 ```
 ^trocado$
 ```
 
 #### naipe
+
 ```
 ^naipe$
 ```
 
 #### creio
+
 ```
 ^creio$
 ```
 
 #### dai
+
 ```
 ^dai$
 ```
 
 #### vorta
+
 ```
 ^vorta$
 ```
 
 #### pega
+
 ```
 ^pega$
 ```
 
 #### amostra
+
 ```
 ^amostra$
 ```
+
 #### sepa
+
 ```
 ^sepa$
 ```
 
 #### senao
+
 ```
 ^senao$
 ```
 
 #### arrodeia
+
 ```
 ^arrodeia$
 ```
 
 #### ateque
+
 ```
 ^ateque$
 ```
 
-#### assign_operator
+#### assignoperator
+
 ```
 ^=$
 ```
 
-#### relational_operator
+#### relationaloperator
+
 ```
 ^(<|>|==|!=|>=|<=)$
 ```
 
-#### logical_operator
+#### logicaloperator
+
 ```
 ^(&&|\\|\\|)$
 ```
 
-#### not_operator
+#### notoperator
+
 ```
 ^!$
 ```
 
-#### arithmetic_operator
+#### arithmeticoperator
+
 ```
 ^(\\+|-)$
 ```
 
-#### multiplier_operator
+#### multiplieroperator
+
 ```
 ^(\\*|/)$
 ```
 
 #### (
+
 ```
 ^\\($
 ```
 
 #### )
+
 ```
 ^\\)$
 ```
 
 #### {
+
 ```
 ^\\{$
 ```
 
 #### }
+
 ```
 ^\\}$
 ```
 
 #### ,
+
 ```
 ^,$
 ```
 
 #### ;
+
 ```
 ^;$
 ```
 
 #### int
+
 ```
 ^-?\\d+$
 ```
 
 #### float
+
 ```
 ^-?\\d+\\.\\d+$
 ```
 
 #### bool
+
 ```
 ^(verdadeiro|falso)$
 ```
 
-#### string_literal
+#### stringliteral
+
 ```
 ^\"([^\"\\\\]*(\\\\.[^\"\\\\]*)*)\"$
 ```
 
 #### id
+
 ```
 ^[a-zA-Z]\\w*$
 ```
@@ -336,104 +371,131 @@ pila dai() {
 ## BNF
 
 ### Programa
+
 ```
-F = { <begin> ::= pila dai {<expr> vorta;}
+F = { <begin> ::= pila dai () { <expr> vorta}; }
 }
 ```
 
 ### Expressões
+
 ```
-F = { <expr>        ::= <declr_strct> <expr> | vazio
-      <declr_strct> ::= <declr_var> | <amostra> | <pega> | <arrodeia> | <ateque> | <sepa>
+F = { <expr>        ::= declrstrct expr | declrstrct | vazio
+      <declr_strct> ::= declrvar |amostra' | pega' | arrodeia' | ateque' | sepa' | id assignoperator VOV arithmetic;
 }
 ```
 
 ### Declaração de estruturas
+
 #### Variavéis
+
 ```
-F = { <declr_var> ::= <tipo> <id> <mais_var>;
-      <mais_var>  ::= <atribuir> <mais_var'> | vazio
-      <mais_var'> ::= , <id> <atribuir> <mais_var'> | vazio
+F = { <declrvar> ::= tipo id maisvar | tipo id ';'
+      <maisvar>  ::= atribuir maisvar' | atribuir | maisvar'
+      <maisvar'> ::= id atribuir maisvar' | ';'
 }
 ```
+
 #### Amostra
+
 ```
-F = { <amostra>      ::= amostra("<str><amostra_var> ;
-      <amostra_var>  ::= <teclado><str><amostra_var'> | ")
-      <amostra_var'> ::= ", <id>)
+F = { <amostra'> ::= amostra ( amostravar
+      <amostravar>  ::= stringliteral amostravar' | id amostravar'
+      <amostravar'> ::= , amostravar | );
 }
 ```
+
 #### Pega
+
 ```
-F = { <pega> ::= pega("<teclado>", &<id>);
+F = { <pega> ::= pega( id );
 }
 ```
+
 #### Arrodeia
+
 ```
-F = { <arrodeia>  ::= arrodeia( <arrodeia'> ; <condição> ){ <expr> }
-      <arrodeia'> ::= <declr_var> | <id> <atribuir>
+F = { <arrodeia>  ::= arrodeia ( arrodeia'' ; cond) {expr}
+      <arrodeia''> ::= declrvar | id atribuir
 }
 ```
+
 #### Ateque
+
 ```
-F = { <ateque> ::= ateque (<condição>) { <expr> }
+F = { <ateque> ::= ateque '('cond')' '{' expr '}'
 }
 ```
+
 #### Sepa - Senao
+
 ```
-F = { <sepa>  ::= sepa(<condição>) { <expr> } <sepa'>
-      <sepa'> ::= senao<senao>
-      <senao> ::= <sepa> | {<expr>}
+F = { <sepa'>  ::= sepa '('cond')' '{' expr '}' | sepa '('cond')' '{' expr '}' sepa''
+      <sepa''> ::= senao senao'
+      <senao'> ::= sepa' |'{' expr '}'
 }
 ```
 
 ### Auxiliares das estruturas
+
 #### Atribuição
+
 ```
-F = { <atribuir>  ::= <assign_operator> <atribuir'> | vazio
-      <atribuir'> ::= <valor> | <Vtrocado>| <str> | <id> | <VOV>
-      <assign_operator>       ::= "="
+F = { <atribuir>  ::= assignoperator atribuir'
+      <atribuir'> ::=  int | float | bool | stringliteral | id | id' | VOV
+      <assignoperator>       ::= "="
 }
 ```
-#### Teclado
-```
-F = { <teclado>  ::= %<teclado'>
-      <teclado'> ::= p | t | b | n
-}
-```
+
 #### Condição
+
 ```
-F = { <condição>  ::= relational_operator <op_grande>
-      <op_grande> ::= logical_operator relational_operator <op_grande> | vazio
+F = { <condição>  ::= relational opgrande | relational
+      <opgrande> ::= logical relational opgrande| logical relational
 }
 ```
 
 ### Operações
+
 ```
-<VOV> ::= <valor> | <Vtrocado> | <str> | <id>
+<VOV> ::= int | float | id  | id'
 ```
+
 #### Operação Aritmética
+
 ```
-F = { <arithmetic_operator>    ::= <sinal_arit> <VOV> <cont>
-      <cont>       ::= <sinal_arit> <VOV> <cont> | vazio
+F = { <arithmeticoperator>    ::= arithmeticoperator VOV cont | arithmeticoperator VOV
+      <cont>       ::= arithmeticoperator VOV cont| arithmeticoperator VOV
       <sinal_arit> ::= + | - | * | /
 }
 ```
+
 #### Operação Relacional
+
 ```
-F = { <relational_operator>    -> <VOV> <sinal_rel> <VOV>
-<sinal_rel> -> "==" | "!=" | ">" | "<" | ">=" | "<="
+F = { <relationaloperator>    ::= VOV relationaloperator VOV
+<sinal_rel> ::= "==" | "!=" | ">" | "<" | ">=" | "<="
 }
 ```
+
 #### Operação Lógica
+
 ```
-F = { <logical_operator>    -> <id> <sinal_log> <id>
+F = { <logicaloperator>    -> id' logicaloperator id'
 <sinal_log> -> "||" | "&&" | "!" | "^"
 }
 ```
 
+#### ID
+
+```
+F = { id' ::= stringliteral id}
+```
+
 ### Tipos de dados
+
 #### Alfabeto
+
 ```
 F = { <alfabeto> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j"
 | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v"
@@ -442,32 +504,44 @@ F = { <alfabeto> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j"
 | "U" | "V" | "W" | "X" | "Y" | "Z"
 }
 ```
+
 #### Numeral
+
 ```
 F = { <numeral> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 }
 ```
+
 #### Tipos
+
 ```
 F = { <tipo> ::= pila | trocado | creio | naipe
 }
 ```
+
 #### Nome para variaveis
+
 ```
 F = { <id> ::= <alfabeto> <str>
 }
 ```
+
 #### Strings
+
 ```
 F = { <str> ::= <alfabeto> <str> | <numeral> <str> | "_" <str> | vazio
 }
 ```
+
 #### Valor Inteiro
+
 ```
 F = { <valor> ::= <numeral> <valor> | <numeral>
 }
 ```
+
 #### Valor Real
+
 ```
 F = { <Vtrocado> ::= <valor> "." <valor> | <valor>
 }
