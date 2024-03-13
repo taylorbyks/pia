@@ -1,10 +1,12 @@
-import { Token } from '../types'
-import table from './table.json'
-import grammar from './grammar.json'
+import { Stack, Token, Table, Grammar } from '../types'
+import tableJson from './table.json'
+import grammarJson from './grammar.json'
+
+const table = tableJson as Table
+const grammar = grammarJson as Grammar
 
 const parser = (tokens: Token[]) => {
   let currentToken = tokens.shift()
-  const syntaxTree = { type: 'Program', children: [] }
   const errors: string[] = []
   const stack = [
     [
@@ -14,7 +16,7 @@ const parser = (tokens: Token[]) => {
       },
       '0',
     ],
-  ]
+  ] as Stack
 
   while (currentToken) {
     const currentState = stack[stack.length - 1][1]
@@ -55,17 +57,12 @@ const parser = (tokens: Token[]) => {
       const ruleNumber = nextState.split(' ')[1]
       const [rule, production] = grammar[ruleNumber].split('->')
 
-      const node = { type: rule, children: [] }
-      for (let i = 0; i < production.split(' ').length; i++) {
-        node.children.push(stack.pop()[0])
-      }
-      node.children = node.children.reverse()
-      const parentState = stack[stack.length - 1][1]
-      const parentNextState = table[parentState][rule]
+      const productionLength = production.split(' ').length
+      stack.splice(-productionLength, productionLength)
 
-      stack.push([{ type: rule, value: production }, table[parentState][rule]])
+      const state = stack[stack.length - 1][1]
 
-      syntaxTree.children.push(node)
+      stack.push([{ type: rule, value: production }, table[state][rule]])
     }
   }
 
