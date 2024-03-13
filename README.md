@@ -380,8 +380,8 @@ F = { <begin> ::= pila dai () { <expr> vorta}; }
 ### Expressões
 
 ```
-F = { <expr>        ::= declrstrct expr | declrstrct | vazio
-      <declr_strct> ::= declrvar |amostra' | pega' | arrodeia' | ateque' | sepa' | id assignoperator VOV arithmetic;
+F = { <expr>        ::= <declrstrct> <expr> | <declrstrct> | vazio
+      <declr_strct> ::= <declrvar> |<amostra'> | <pega'> | <arrodeia'> | <ateque'> | <sepa'> | id <assignoperator> <VOV> <arithmetic>;
 }
 ```
 
@@ -390,49 +390,49 @@ F = { <expr>        ::= declrstrct expr | declrstrct | vazio
 #### Variavéis
 
 ```
-F = { <declrvar> ::= tipo id maisvar | tipo id ';'
-      <maisvar>  ::= atribuir maisvar' | atribuir | maisvar'
-      <maisvar'> ::= id atribuir maisvar' | ';'
+F = { <declrvar> ::= <tipo> id <maisvar> | <tipo> id;
+      <maisvar>  ::= <atribuir> <maisvar'> | <atribuir> | <maisvar'>
+      <maisvar'> ::= id <atribuir> <maisvar'> | ;
 }
 ```
 
 #### Amostra
 
 ```
-F = { <amostra'> ::= amostra ( amostravar
-      <amostravar>  ::= stringliteral amostravar' | id amostravar'
-      <amostravar'> ::= , amostravar | );
+F = { <amostra'> ::= amostra(<amostravar>
+      <amostravar>  ::= stringliteral <amostravar'> | id <amostravar'>
+      <amostravar'> ::= , <amostravar> | );
 }
 ```
 
 #### Pega
 
 ```
-F = { <pega> ::= pega( id );
+F = { <pega> ::= pega(id);
 }
 ```
 
 #### Arrodeia
 
 ```
-F = { <arrodeia>  ::= arrodeia ( arrodeia'' ; cond) {expr}
-      <arrodeia''> ::= declrvar | id atribuir
+F = { <arrodeia>  ::= arrodeia( <arrodeia'> ; cond) {<expr>}
+      <arrodeia''> ::= <declrvar> | id <atribuir>
 }
 ```
 
 #### Ateque
 
 ```
-F = { <ateque> ::= ateque '('cond')' '{' expr '}'
+F = { <ateque> ::= ateque(<cond>) {<expr>}
 }
 ```
 
 #### Sepa - Senao
 
 ```
-F = { <sepa'>  ::= sepa '('cond')' '{' expr '}' | sepa '('cond')' '{' expr '}' sepa''
-      <sepa''> ::= senao senao'
-      <senao'> ::= sepa' |'{' expr '}'
+F = { <sepa'>  ::= sepa(<cond>){<expr>} | sepa(<cond>){<expr>} <sepa''>
+      <sepa''> ::= senao <senao'>
+      <senao'> ::= <sepa'> | {<expr>}
 }
 ```
 
@@ -441,17 +441,17 @@ F = { <sepa'>  ::= sepa '('cond')' '{' expr '}' | sepa '('cond')' '{' expr '}' s
 #### Atribuição
 
 ```
-F = { <atribuir>  ::= assignoperator atribuir'
-      <atribuir'> ::=  int | float | bool | stringliteral | id | id' | VOV
-      <assignoperator>       ::= "="
+F = { <atribuir>  ::= <assignoperator> <atribuir'>
+      <atribuir'> ::=  int | float | bool | stringliteral | id | id' | <VOV>
+      <assignoperator>       ::= =
 }
 ```
 
 #### Condição
 
 ```
-F = { <condição>  ::= relational opgrande | relational
-      <opgrande> ::= logical relational opgrande| logical relational
+F = { <cond>  ::= relational <opgrande> | relational
+      <opgrande> ::= logical relational <opgrande>| logical relational
 }
 ```
 
@@ -464,25 +464,25 @@ F = { <condição>  ::= relational opgrande | relational
 #### Operação Aritmética
 
 ```
-F = { <arithmeticoperator>    ::= arithmeticoperator VOV cont | arithmeticoperator VOV
-      <cont>       ::= arithmeticoperator VOV cont| arithmeticoperator VOV
-      <sinal_arit> ::= + | - | * | /
+F = { <arithmeticoperator>    ::= <sinalarit> <VOV> <cont> | <sinalarit> <VOV>
+      <cont>       ::= <sinalarit> <VOV> <cont>| <sinalarit> <VOV>
+      <sinalarit> ::= + | - | * | /
 }
 ```
 
 #### Operação Relacional
 
 ```
-F = { <relationaloperator>    ::= VOV relationaloperator VOV
-<sinal_rel> ::= "==" | "!=" | ">" | "<" | ">=" | "<="
+F = { <relationaloperator>    ::= <VOV> <sinalrel> <VOV>
+<sinalrel> ::= "==" | "!=" | ">" | "<" | ">=" | "<="
 }
 ```
 
 #### Operação Lógica
 
 ```
-F = { <logicaloperator>    -> id' logicaloperator id'
-<sinal_log> -> "||" | "&&" | "!" | "^"
+F = { <logicaloperator>    -> <id'> <sinallog> <id'>
+<sinallog> -> "||" | "&&" | "!" | "^"
 }
 ```
 
