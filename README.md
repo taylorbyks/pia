@@ -36,7 +36,7 @@ Os operadores aritméticos funcionam paras os tipos inteiros e ponto flutuante d
 |----------|-------------------------------------------------------|---------|
 | + | Soma dois operandos | a + b |
 | - | Subtrai dois operandos | a - b |
-| * | Multiplica dois operandos, da esquerda para a direita | a * b |
+| _ | Multiplica dois operandos, da esquerda para a direita | a _ b |
 | / | Divide dois operandos, da esquerda pelo da direita | a / b |
 
 #### Relacionais
@@ -69,9 +69,6 @@ Sintaxe:
 sepa (condição) {
 	instruções
 }
-senao sepa (condição) {
-	instruções
-}
 senao {
 	instruções
 }
@@ -88,12 +85,12 @@ São dois os tipos de laço de repetição que podem ser criados:
 Sintaxe:
 
 ```
-arrodeia (operando; condição; operação) {
+arrodeia (operando; condição) {
 	instruções
 }
 ```
 
-Semântica: Definimos o operando como primeiro parâmetro, a condição de parada como segundo e a operação que sera realizada ao final do laço
+Semântica: Definimos o operando como primeiro parâmetro e a condição de parada como segundo
 
 #### ateque
 
@@ -142,8 +139,8 @@ pila dai() {
 
     amostra ("Digite 5 valores: ");
 
-    arrodeia (VEZES = 0; VEZES<5; VEZES+=1) {
-        pega("%t", &A);
+    arrodeia (VEZES = 0; VEZES<5) {
+        pega(A);
         sepa (A>0){
         N = N+1;
         }
@@ -545,4 +542,36 @@ F = { <valor> ::= <numeral> <valor> | <numeral>
 ```
 F = { <Vtrocado> ::= <valor> "." <valor> | <valor>
 }
+```
+
+## Gramática
+
+```
+S -> pila dai '(' ')' '{' expr vorta ';' '}' ';';
+expr -> declrstrct expr | declrstrct | ' '
+declrstrct -> declrvar|amostra'|pega'|arrodeia'|ateque'|sepa'|id assignoperator VOV arithmetic ";"
+declrvar -> tipo id maisvar | tipo id ';'
+tipo -> pila | trocado | naipe | creio
+maisvar -> atribuir maisvar' | atribuir | maisvar'
+maisvar' -> ',' id atribuir maisvar' | ';'
+amostra' -> amostra '(' amostravar
+amostravar -> stringliteral amostravar' | id amostravar'
+amostravar' -> ',' amostravar | ')' ';'
+pega' -> pega '(' id ')' ';'
+arrodeia' -> arrodeia '(' arrodeia'' ';' cond ')' '{' expr '}'
+arrodeia'' -> declrvar | id atribuir
+ateque' -> ateque '('cond')' '{' expr '}'
+sepa' -> sepa '('cond')' '{' expr '}' | sepa '('cond')' '{' expr '}' sepa''
+sepa'' -> senao senao'
+senao' -> sepa'|'{' expr '}'
+atribuir -> assignoperator atribuir'
+atribuir' -> int | float | bool | stringliteral |id |id'|VOV
+cond -> relational opgrande | relational
+opgrande -> logical relational opgrande| logical relational
+VOV -> int | float | id  | id'
+arithmetic -> arithmeticoperator VOV cont | arithmeticoperator VOV
+cont -> arithmeticoperator VOV cont| arithmeticoperator VOV
+relational -> VOV relationaloperator VOV
+logical -> id' logicaloperator id'
+id' -> stringliteral id
 ```
