@@ -51,7 +51,7 @@
       "opgrande": "",
       "logical": "",
       "logicaloperator": "",
-      "EOF": "",
+      "S": "accept",
       "cont": "",
       "sepa''": "",
       "senao'": ""
@@ -5010,7 +5010,7 @@
       "opgrande": "",
       "logical": "",
       "logicaloperator": "",
-      "EOF": "accept",
+      "EOF": "reduce 0",
       "cont": "",
       "sepa''": "",
       "senao'": ""

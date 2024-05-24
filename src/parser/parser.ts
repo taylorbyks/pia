@@ -1,14 +1,14 @@
-import { Stack, Token, Table, Grammar } from '../types'
+import { Stack, Token, Table, Grammar, ASTNode } from '../types'
 import tableJson from './table.json'
 import grammarJson from './grammar.json'
 
 const table = tableJson as Table
 const grammar = grammarJson as Grammar
 
-const parser = (tokens: Token[]) => {
+const parser = (tokens: Token[]): ASTNode | string => {
   let currentToken = tokens.shift()
   const errors: string[] = []
-  const stack = [
+  const stack: Stack = [
     [
       {
         type: 'EOF',
@@ -16,10 +16,21 @@ const parser = (tokens: Token[]) => {
       },
       '0',
     ],
-  ] as Stack
+  ]
+
+  const astStack: ASTNode[] = []
 
   while (currentToken) {
     const currentState = stack[stack.length - 1][1]
+
+    if (currentState === 'accept') {
+      if (errors.length > 0) {
+        return `Rejected ${errors.join('\n')}`
+      }
+
+      return astStack[0]
+    }
+
     let nextState = table[currentState][currentToken.type]
 
     if (nextState === '') {
@@ -39,16 +50,9 @@ const parser = (tokens: Token[]) => {
       }
     }
 
-    if (nextState === 'accept') {
-      if (errors.length > 0) {
-        return `Rejected ${errors.join('\n')}`
-      }
-
-      return 'Accepted'
-    }
-
     if (nextState.includes('shift')) {
       stack.push([currentToken, nextState.split(' ')[1]])
+      astStack.push({ type: currentToken.type, value: currentToken.value, children: [] })
 
       currentToken = tokens.shift()
     }
@@ -57,12 +61,18 @@ const parser = (tokens: Token[]) => {
       const ruleNumber = nextState.split(' ')[1]
       const [rule, production] = grammar[ruleNumber].split('->')
 
-      const productionLength = production.split(' ').length
+      const productionItems = production.split(' ').filter((item) => item !== '')
+      const productionLength = productionItems.length
+
+      const children = astStack.splice(-productionLength, productionLength)
       stack.splice(-productionLength, productionLength)
 
       const state = stack[stack.length - 1][1]
+      const newState = table[state][rule]
 
-      stack.push([{ type: rule, value: production }, table[state][rule]])
+      stack.push([{ type: rule, value: production }, newState])
+
+      astStack.push({ type: rule.trim(), value: production.trim(), children })
     }
   }
 
