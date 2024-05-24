@@ -8,6 +8,7 @@
   "scripts": {
     "lexer": "bun lexer/index.ts",
     "parser": "bun parser/index.ts",
+    "semantic": "bun semantic/index.ts",
     "compile": "bun index.ts"
   },
   "peerDependencies": {

@@ -1,6 +1,6 @@
-import { lexer } from './lexer/lexer.ts'
-import { parser } from './parser/parser.ts'
-import { semanticAnalyzer } from './semantic/semantic.ts'
+import { lexer } from '../lexer/lexer.ts'
+import { parser } from '../parser/parser.ts'
+import { semanticAnalyzer } from './semantic.ts'
 
 const args = Bun.argv
 
@@ -18,13 +18,13 @@ try {
   const file = await Bun.file(filePath).text()
   const tokens = lexer(file)
   const result = parser(tokens)
-  // semanticAnalyzer(result)
+  semanticAnalyzer(result)
 
   console.log('Source code:')
   console.log(file)
   console.log('')
   console.log('Result:')
-  console.log(JSON.stringify(result, null, 2))
+  console.log(result)
 } catch (error) {
   console.error(error)
 }
