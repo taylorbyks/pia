@@ -3235,10 +3235,12 @@ test('should throw unexpected token', () => {
     amostra("%p valores positivos", N);
     vorta;
 };`
-
-  const tokens = lexer(sourceCode)
-  const result = parser(tokens)
-  expect(result).toEqual('Rejected Error: Unexpected token ;\nError: Unexpected token ;\nError: Unexpected token ;')
+  try {
+    const tokens = lexer(sourceCode)
+    parser(tokens)
+  } catch (error) {
+    expect(error).toEqual('Rejected Error: Unexpected token ;\nError: Unexpected token ;\nError: Unexpected token ;')
+  }
 })
 
 test('should throw unexpected token', () => {
@@ -3257,10 +3259,12 @@ test('should throw unexpected token', () => {
     amostra("%p valores positivos", N);
     vorta;
   };`
-
-  const tokens = lexer(sourceCode)
-  const result = parser(tokens)
-  expect(result).toEqual('Rejected Error: Unexpected token VEZES\nError: Unexpected token VEZES')
+  try {
+    const tokens = lexer(sourceCode)
+    parser(tokens)
+  } catch (error) {
+    expect(error).toEqual('Rejected Error: Unexpected token VEZES\nError: Unexpected token VEZES')
+  }
 })
 
 test('should tokenize and parse a simple program with chained arrodeia correctly', () => {

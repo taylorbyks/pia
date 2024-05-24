@@ -5,7 +5,7 @@ import grammarJson from './grammar.json'
 const table = tableJson as Table
 const grammar = grammarJson as Grammar
 
-const parser = (tokens: Token[]): ASTNode | string => {
+const parser = (tokens: Token[]): ASTNode => {
   let currentToken = tokens.shift()
   const errors: string[] = []
   const stack: Stack = [
@@ -25,7 +25,7 @@ const parser = (tokens: Token[]): ASTNode | string => {
 
     if (currentState === 'accept') {
       if (errors.length > 0) {
-        return `Rejected ${errors.join('\n')}`
+        throw `Rejected ${errors.join('\n')}`
       }
 
       return astStack[0]
@@ -76,7 +76,7 @@ const parser = (tokens: Token[]): ASTNode | string => {
     }
   }
 
-  return `Rejected ${errors.join('\n')}`
+  throw `Rejected ${errors.join('\n')}`
 }
 
 export { parser }

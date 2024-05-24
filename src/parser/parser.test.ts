@@ -9,11 +9,13 @@ test('should show an rejected error if program not start correctly', () => {
     { type: ';', value: ';' },
   ]
 
-  const result = parser(tokens)
-
-  expect(result).toEqual(
-    'Rejected Error: Unexpected token foo\nError: Unexpected token foo\nError: Unexpected token foo\nError: Unexpected token foo\nError: Unexpected token foo\nError: Unexpected token +\nError: Unexpected token +'
-  )
+  try {
+    parser(tokens)
+  } catch (error) {
+    expect(error).toEqual(
+      'Rejected Error: Unexpected token foo\nError: Unexpected token foo\nError: Unexpected token foo\nError: Unexpected token foo\nError: Unexpected token foo\nError: Unexpected token +\nError: Unexpected token +'
+    )
+  }
 })
 
 test('should show an accepted error if program not have correctly token', () => {
@@ -272,9 +274,11 @@ test('should show an accepted error if program not have correctly token', () => 
     },
   ]
 
-  const error = parser(tokens)
-
-  expect(error).toEqual('Rejected Error: Unexpected token "%p valores positivos\\n"\nError: Unexpected token }')
+  try {
+    parser(tokens)
+  } catch (error) {
+    expect(error).toEqual('Rejected Error: Unexpected token "%p valores positivos\\n"\nError: Unexpected token }')
+  }
 })
 
 test('should parse simple program with arrodeia correctly', () => {
