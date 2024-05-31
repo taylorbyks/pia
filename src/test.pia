@@ -1,25 +1,11 @@
 pila dai() {
-    pila VEZES = 0, N = 0;
-    trocado A = 1.2;
-    naipe B = "teste";
-    creio C = verdadeiro;
+    pila N = 0;
 
-    amostra("Digite 5 valores: ");
-
-    arrodeia(VEZES = 0; VEZES<5) {
-        pega(A);
-        sepa (A>0){
+    arrodeia(N = 0; N<5) {
         N = N + 1;
-        } senao {
-        N = N - 1;
-        }
     }
 
-    amostra("%p valores positivos", N);
-
-    ateque (VEZES>0){
-      N = N + 1;
-    }
+    amostra("PIA Compiler");
 
     vorta;
 };
