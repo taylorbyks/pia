@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test'
 import { semanticAnalyzer } from './semantic.ts'
 
-test('should reject if use a undeclared variable', () => {
+test('should reject if a variable is used without declaration', () => {
   const ASTTree = {
     type: 'S',
     value: 'pila dai ( ) { expr vorta ; } ;',
@@ -312,7 +312,7 @@ test('should accept if use a declared variable', () => {
   expect(result).toEqual('Accepted')
 })
 
-test.skip('should parse simple program with arrodeia correctly', () => {
+test('should reject if a variable is declared more than once in the same scope', () => {
   const ASTTree = {
     type: 'S',
     value: 'pila dai ( ) { expr vorta ; } ;',
@@ -367,7 +367,7 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                   },
                   {
                     type: 'id',
-                    value: 'VEZES',
+                    value: 'N',
                     children: [],
                   },
                   {
@@ -398,18 +398,53 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                       },
                       {
                         type: "maisvar'",
-                        value: ", id atribuir maisvar'",
+                        value: ';',
                         children: [
                           {
-                            type: ',',
-                            value: ',',
+                            type: ';',
+                            value: ';',
                             children: [],
                           },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'expr',
+            value: 'declrstrct expr',
+            children: [
+              {
+                type: 'declrstrct',
+                value: 'declrvar',
+                children: [
+                  {
+                    type: 'declrvar',
+                    value: 'tipo id maisvar',
+                    children: [
+                      {
+                        type: 'tipo',
+                        value: 'pila',
+                        children: [
                           {
-                            type: 'id',
-                            value: 'N',
+                            type: 'pila',
+                            value: 'pila',
                             children: [],
                           },
+                        ],
+                      },
+                      {
+                        type: 'id',
+                        value: 'N',
+                        children: [],
+                      },
+                      {
+                        type: 'maisvar',
+                        value: "atribuir maisvar'",
+                        children: [
                           {
                             type: 'atribuir',
                             value: "assignoperator atribuir'",
@@ -449,6 +484,394 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                   },
                 ],
               },
+              {
+                type: 'expr',
+                value: 'declrstrct',
+                children: [
+                  {
+                    type: 'declrstrct',
+                    value: 'id assignoperator VOV arithmetic ;',
+                    children: [
+                      {
+                        type: 'id',
+                        value: 'N',
+                        children: [],
+                      },
+                      {
+                        type: 'assignoperator',
+                        value: '=',
+                        children: [],
+                      },
+                      {
+                        type: 'VOV',
+                        value: 'id',
+                        children: [
+                          {
+                            type: 'id',
+                            value: 'N',
+                            children: [],
+                          },
+                        ],
+                      },
+                      {
+                        type: 'arithmetic',
+                        value: 'arithmeticoperator VOV',
+                        children: [
+                          {
+                            type: 'arithmeticoperator',
+                            value: '+',
+                            children: [],
+                          },
+                          {
+                            type: 'VOV',
+                            value: 'int',
+                            children: [
+                              {
+                                type: 'int',
+                                value: '1',
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        type: ';',
+                        value: ';',
+                        children: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'vorta',
+        value: 'vorta',
+        children: [],
+      },
+      {
+        type: ';',
+        value: ';',
+        children: [],
+      },
+      {
+        type: '}',
+        value: '}',
+        children: [],
+      },
+      {
+        type: ';',
+        value: ';',
+        children: [],
+      },
+    ],
+  }
+
+  try {
+    semanticAnalyzer(ASTTree)
+  } catch (error) {
+    expect(error).toEqual('Rejected Error: Variable N already declared.')
+  }
+})
+
+test('should reject if incompatible types are assigned to a variable', () => {
+  const ASTTree = {
+    type: 'S',
+    value: 'pila dai ( ) { expr vorta ; } ;',
+    children: [
+      {
+        type: 'pila',
+        value: 'pila',
+        children: [],
+      },
+      {
+        type: 'dai',
+        value: 'dai',
+        children: [],
+      },
+      {
+        type: '(',
+        value: '(',
+        children: [],
+      },
+      {
+        type: ')',
+        value: ')',
+        children: [],
+      },
+      {
+        type: '{',
+        value: '{',
+        children: [],
+      },
+      {
+        type: 'expr',
+        value: 'declrstrct expr',
+        children: [
+          {
+            type: 'declrstrct',
+            value: 'declrvar',
+            children: [
+              {
+                type: 'declrvar',
+                value: 'tipo id maisvar',
+                children: [
+                  {
+                    type: 'tipo',
+                    value: 'pila',
+                    children: [
+                      {
+                        type: 'pila',
+                        value: 'pila',
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: 'id',
+                    value: 'N',
+                    children: [],
+                  },
+                  {
+                    type: 'maisvar',
+                    value: "atribuir maisvar'",
+                    children: [
+                      {
+                        type: 'atribuir',
+                        value: "assignoperator atribuir'",
+                        children: [
+                          {
+                            type: 'assignoperator',
+                            value: '=',
+                            children: [],
+                          },
+                          {
+                            type: "atribuir'",
+                            value: 'int',
+                            children: [
+                              {
+                                type: 'int',
+                                value: '0',
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        type: "maisvar'",
+                        value: ';',
+                        children: [
+                          {
+                            type: ';',
+                            value: ';',
+                            children: [],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'expr',
+            value: 'declrstrct',
+            children: [
+              {
+                type: 'declrstrct',
+                value: 'id assignoperator VOV arithmetic ;',
+                children: [
+                  {
+                    type: 'id',
+                    value: 'N',
+                    children: [],
+                  },
+                  {
+                    type: 'assignoperator',
+                    value: '=',
+                    children: [],
+                  },
+                  {
+                    type: 'VOV',
+                    value: 'id',
+                    children: [
+                      {
+                        type: 'id',
+                        value: 'N',
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: 'arithmetic',
+                    value: 'arithmeticoperator VOV',
+                    children: [
+                      {
+                        type: 'arithmeticoperator',
+                        value: '+',
+                        children: [],
+                      },
+                      {
+                        type: 'VOV',
+                        value: 'float',
+                        children: [
+                          {
+                            type: 'float',
+                            value: '1.1',
+                            children: [],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    type: ';',
+                    value: ';',
+                    children: [],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'vorta',
+        value: 'vorta',
+        children: [],
+      },
+      {
+        type: ';',
+        value: ';',
+        children: [],
+      },
+      {
+        type: '}',
+        value: '}',
+        children: [],
+      },
+      {
+        type: ';',
+        value: ';',
+        children: [],
+      },
+    ],
+  }
+
+  try {
+    semanticAnalyzer(ASTTree)
+  } catch (error) {
+    expect(error).toEqual(
+      'Rejected Error: Type mismatch in arithmetic operation for variable N. Expected pila, found float.'
+    )
+  }
+})
+
+test('should reject if incompatible types are used in arithmetic operations', () => {
+  const ASTTree = {
+    type: 'S',
+    value: 'pila dai ( ) { expr vorta ; } ;',
+    children: [
+      {
+        type: 'pila',
+        value: 'pila',
+        children: [],
+      },
+      {
+        type: 'dai',
+        value: 'dai',
+        children: [],
+      },
+      {
+        type: '(',
+        value: '(',
+        children: [],
+      },
+      {
+        type: ')',
+        value: ')',
+        children: [],
+      },
+      {
+        type: '{',
+        value: '{',
+        children: [],
+      },
+      {
+        type: 'expr',
+        value: 'declrstrct expr',
+        children: [
+          {
+            type: 'declrstrct',
+            value: 'declrvar',
+            children: [
+              {
+                type: 'declrvar',
+                value: 'tipo id maisvar',
+                children: [
+                  {
+                    type: 'tipo',
+                    value: 'naipe',
+                    children: [
+                      {
+                        type: 'naipe',
+                        value: 'naipe',
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: 'id',
+                    value: 'N',
+                    children: [],
+                  },
+                  {
+                    type: 'maisvar',
+                    value: "atribuir maisvar'",
+                    children: [
+                      {
+                        type: 'atribuir',
+                        value: "assignoperator atribuir'",
+                        children: [
+                          {
+                            type: 'assignoperator',
+                            value: '=',
+                            children: [],
+                          },
+                          {
+                            type: "atribuir'",
+                            value: 'stringliteral',
+                            children: [
+                              {
+                                type: 'stringliteral',
+                                value: '"n"',
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        type: "maisvar'",
+                        value: ';',
+                        children: [
+                          {
+                            type: ';',
+                            value: ';',
+                            children: [],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
             ],
           },
           {
@@ -461,15 +884,15 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                 children: [
                   {
                     type: 'declrvar',
-                    value: 'tipo id ;',
+                    value: 'tipo id maisvar',
                     children: [
                       {
                         type: 'tipo',
-                        value: 'trocado',
+                        value: 'pila',
                         children: [
                           {
-                            type: 'trocado',
-                            value: 'trocado',
+                            type: 'pila',
+                            value: 'pila',
                             children: [],
                           },
                         ],
@@ -480,6 +903,100 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                         children: [],
                       },
                       {
+                        type: 'maisvar',
+                        value: "atribuir maisvar'",
+                        children: [
+                          {
+                            type: 'atribuir',
+                            value: "assignoperator atribuir'",
+                            children: [
+                              {
+                                type: 'assignoperator',
+                                value: '=',
+                                children: [],
+                              },
+                              {
+                                type: "atribuir'",
+                                value: 'int',
+                                children: [
+                                  {
+                                    type: 'int',
+                                    value: '0',
+                                    children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                          {
+                            type: "maisvar'",
+                            value: ';',
+                            children: [
+                              {
+                                type: ';',
+                                value: ';',
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: 'expr',
+                value: 'declrstrct',
+                children: [
+                  {
+                    type: 'declrstrct',
+                    value: 'id assignoperator VOV arithmetic ;',
+                    children: [
+                      {
+                        type: 'id',
+                        value: 'A',
+                        children: [],
+                      },
+                      {
+                        type: 'assignoperator',
+                        value: '=',
+                        children: [],
+                      },
+                      {
+                        type: 'VOV',
+                        value: 'id',
+                        children: [
+                          {
+                            type: 'id',
+                            value: 'N',
+                            children: [],
+                          },
+                        ],
+                      },
+                      {
+                        type: 'arithmetic',
+                        value: 'arithmeticoperator VOV',
+                        children: [
+                          {
+                            type: 'arithmeticoperator',
+                            value: '+',
+                            children: [],
+                          },
+                          {
+                            type: 'VOV',
+                            value: 'int',
+                            children: [
+                              {
+                                type: 'int',
+                                value: '1',
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
                         type: ';',
                         value: ';',
                         children: [],
@@ -488,46 +1005,138 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                   },
                 ],
               },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'vorta',
+        value: 'vorta',
+        children: [],
+      },
+      {
+        type: ';',
+        value: ';',
+        children: [],
+      },
+      {
+        type: '}',
+        value: '}',
+        children: [],
+      },
+      {
+        type: ';',
+        value: ';',
+        children: [],
+      },
+    ],
+  }
+
+  try {
+    semanticAnalyzer(ASTTree)
+  } catch (error) {
+    expect(error).toEqual(
+      'Rejected Error: Type mismatch in arithmetic operation for variable A. Expected naipe, found pila.\nError: Type mismatch in assignment to A. Expected pila, found naipe.'
+    )
+  }
+})
+
+test('should reject if incompatible types are used in logical operations', () => {
+  const ASTTree = {
+    type: 'S',
+    value: 'pila dai ( ) { expr vorta ; } ;',
+    children: [
+      {
+        type: 'pila',
+        value: 'pila',
+        children: [],
+      },
+      {
+        type: 'dai',
+        value: 'dai',
+        children: [],
+      },
+      {
+        type: '(',
+        value: '(',
+        children: [],
+      },
+      {
+        type: ')',
+        value: ')',
+        children: [],
+      },
+      {
+        type: '{',
+        value: '{',
+        children: [],
+      },
+      {
+        type: 'expr',
+        value: 'declrstrct',
+        children: [
+          {
+            type: 'declrstrct',
+            value: "sepa'",
+            children: [
               {
-                type: 'expr',
-                value: 'declrstrct expr',
+                type: "sepa'",
+                value: "sepa ( cond ) { expr } sepa''",
                 children: [
                   {
                     type: 'declrstrct',
-                    value: "amostra'",
+                    value: 'declrvar',
                     children: [
                       {
-                        type: "amostra'",
-                        value: 'amostra ( amostravar',
+                        type: 'declrvar',
+                        value: 'tipo id maisvar',
                         children: [
                           {
-                            type: 'amostra',
-                            value: 'amostra',
-                            children: [],
-                          },
-                          {
-                            type: '(',
-                            value: '(',
-                            children: [],
-                          },
-                          {
-                            type: 'amostravar',
-                            value: "stringliteral amostravar'",
+                            type: 'tipo',
+                            value: 'naipe',
                             children: [
                               {
-                                type: 'stringliteral',
-                                value: '"Digite 5 valores: "',
+                                type: 'naipe',
+                                value: 'naipe',
                                 children: [],
                               },
+                            ],
+                          },
+                          {
+                            type: 'id',
+                            value: 'N',
+                            children: [],
+                          },
+                          {
+                            type: 'maisvar',
+                            value: "atribuir maisvar'",
+                            children: [
                               {
-                                type: "amostravar'",
-                                value: ') ;',
+                                type: 'atribuir',
+                                value: "assignoperator atribuir'",
                                 children: [
                                   {
-                                    type: ')',
-                                    value: ')',
+                                    type: 'assignoperator',
+                                    value: '=',
                                     children: [],
                                   },
+                                  {
+                                    type: "atribuir'",
+                                    value: 'stringliteral',
+                                    children: [
+                                      {
+                                        type: 'stringliteral',
+                                        value: '"n"',
+                                        children: [],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                              {
+                                type: "maisvar'",
+                                value: ';',
+                                children: [
                                   {
                                     type: ';',
                                     value: ';',
@@ -542,36 +1151,96 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                     ],
                   },
                   {
+                    type: 'sepa',
+                    value: 'sepa',
+                    children: [],
+                  },
+                  {
+                    type: '(',
+                    value: '(',
+                    children: [],
+                  },
+                  {
+                    type: 'cond',
+                    value: 'relational',
+                    children: [
+                      {
+                        type: 'relational',
+                        value: 'VOV relationaloperator VOV',
+                        children: [
+                          {
+                            type: 'VOV',
+                            value: 'id',
+                            children: [
+                              {
+                                type: 'id',
+                                value: 'N',
+                                children: [],
+                              },
+                            ],
+                          },
+                          {
+                            type: 'relationaloperator',
+                            value: '>=',
+                            children: [],
+                          },
+                          {
+                            type: 'VOV',
+                            value: 'int',
+                            children: [
+                              {
+                                type: 'int',
+                                value: '1',
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    type: ')',
+                    value: ')',
+                    children: [],
+                  },
+                  {
+                    type: '{',
+                    value: '{',
+                    children: [],
+                  },
+                  {
                     type: 'expr',
                     value: 'declrstrct expr',
                     children: [
                       {
                         type: 'declrstrct',
-                        value: "arrodeia'",
+                        value: 'declrvar',
                         children: [
                           {
-                            type: "arrodeia'",
-                            value: "arrodeia ( arrodeia'' ; cond ) { expr }",
+                            type: 'declrvar',
+                            value: 'tipo id maisvar',
                             children: [
                               {
-                                type: 'arrodeia',
-                                value: 'arrodeia',
-                                children: [],
-                              },
-                              {
-                                type: '(',
-                                value: '(',
-                                children: [],
-                              },
-                              {
-                                type: "arrodeia''",
-                                value: 'id atribuir',
+                                type: 'tipo',
+                                value: 'pila',
                                 children: [
                                   {
-                                    type: 'id',
-                                    value: 'VEZES',
+                                    type: 'pila',
+                                    value: 'pila',
                                     children: [],
                                   },
+                                ],
+                              },
+                              {
+                                type: 'id',
+                                value: 'A',
+                                children: [],
+                              },
+                              {
+                                type: 'maisvar',
+                                value: "atribuir maisvar'",
+                                children: [
                                   {
                                     type: 'atribuir',
                                     value: "assignoperator atribuir'",
@@ -594,251 +1263,18 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                                       },
                                     ],
                                   },
-                                ],
-                              },
-                              {
-                                type: ';',
-                                value: ';',
-                                children: [],
-                              },
-                              {
-                                type: 'cond',
-                                value: 'relational',
-                                children: [
                                   {
-                                    type: 'relational',
-                                    value: 'VOV relationaloperator VOV',
+                                    type: "maisvar'",
+                                    value: ';',
                                     children: [
                                       {
-                                        type: 'VOV',
-                                        value: 'id',
-                                        children: [
-                                          {
-                                            type: 'id',
-                                            value: 'VEZES',
-                                            children: [],
-                                          },
-                                        ],
-                                      },
-                                      {
-                                        type: 'relationaloperator',
-                                        value: '<',
+                                        type: ';',
+                                        value: ';',
                                         children: [],
                                       },
-                                      {
-                                        type: 'VOV',
-                                        value: 'int',
-                                        children: [
-                                          {
-                                            type: 'int',
-                                            value: '5',
-                                            children: [],
-                                          },
-                                        ],
-                                      },
                                     ],
                                   },
                                 ],
-                              },
-                              {
-                                type: ')',
-                                value: ')',
-                                children: [],
-                              },
-                              {
-                                type: '{',
-                                value: '{',
-                                children: [],
-                              },
-                              {
-                                type: 'expr',
-                                value: 'declrstrct expr',
-                                children: [
-                                  {
-                                    type: 'declrstrct',
-                                    value: "pega'",
-                                    children: [
-                                      {
-                                        type: "pega'",
-                                        value: 'pega ( id ) ;',
-                                        children: [
-                                          {
-                                            type: 'pega',
-                                            value: 'pega',
-                                            children: [],
-                                          },
-                                          {
-                                            type: '(',
-                                            value: '(',
-                                            children: [],
-                                          },
-                                          {
-                                            type: 'id',
-                                            value: 'A',
-                                            children: [],
-                                          },
-                                          {
-                                            type: ')',
-                                            value: ')',
-                                            children: [],
-                                          },
-                                          {
-                                            type: ';',
-                                            value: ';',
-                                            children: [],
-                                          },
-                                        ],
-                                      },
-                                    ],
-                                  },
-                                  {
-                                    type: 'expr',
-                                    value: 'declrstrct',
-                                    children: [
-                                      {
-                                        type: 'declrstrct',
-                                        value: "sepa'",
-                                        children: [
-                                          {
-                                            type: "sepa'",
-                                            value: 'sepa ( cond ) { expr }',
-                                            children: [
-                                              {
-                                                type: 'sepa',
-                                                value: 'sepa',
-                                                children: [],
-                                              },
-                                              {
-                                                type: '(',
-                                                value: '(',
-                                                children: [],
-                                              },
-                                              {
-                                                type: 'cond',
-                                                value: 'relational',
-                                                children: [
-                                                  {
-                                                    type: 'relational',
-                                                    value: 'VOV relationaloperator VOV',
-                                                    children: [
-                                                      {
-                                                        type: 'VOV',
-                                                        value: 'id',
-                                                        children: [
-                                                          {
-                                                            type: 'id',
-                                                            value: 'A',
-                                                            children: [],
-                                                          },
-                                                        ],
-                                                      },
-                                                      {
-                                                        type: 'relationaloperator',
-                                                        value: '>',
-                                                        children: [],
-                                                      },
-                                                      {
-                                                        type: 'VOV',
-                                                        value: 'int',
-                                                        children: [
-                                                          {
-                                                            type: 'int',
-                                                            value: '0',
-                                                            children: [],
-                                                          },
-                                                        ],
-                                                      },
-                                                    ],
-                                                  },
-                                                ],
-                                              },
-                                              {
-                                                type: ')',
-                                                value: ')',
-                                                children: [],
-                                              },
-                                              {
-                                                type: '{',
-                                                value: '{',
-                                                children: [],
-                                              },
-                                              {
-                                                type: 'expr',
-                                                value: 'declrstrct',
-                                                children: [
-                                                  {
-                                                    type: 'declrstrct',
-                                                    value: 'id assignoperator VOV arithmetic ;',
-                                                    children: [
-                                                      {
-                                                        type: 'id',
-                                                        value: 'N',
-                                                        children: [],
-                                                      },
-                                                      {
-                                                        type: 'assignoperator',
-                                                        value: '=',
-                                                        children: [],
-                                                      },
-                                                      {
-                                                        type: 'VOV',
-                                                        value: 'id',
-                                                        children: [
-                                                          {
-                                                            type: 'id',
-                                                            value: 'N',
-                                                            children: [],
-                                                          },
-                                                        ],
-                                                      },
-                                                      {
-                                                        type: 'arithmetic',
-                                                        value: 'arithmeticoperator VOV',
-                                                        children: [
-                                                          {
-                                                            type: 'arithmeticoperator',
-                                                            value: '+',
-                                                            children: [],
-                                                          },
-                                                          {
-                                                            type: 'VOV',
-                                                            value: 'int',
-                                                            children: [
-                                                              {
-                                                                type: 'int',
-                                                                value: '1',
-                                                                children: [],
-                                                              },
-                                                            ],
-                                                          },
-                                                        ],
-                                                      },
-                                                      {
-                                                        type: ';',
-                                                        value: ';',
-                                                        children: [],
-                                                      },
-                                                    ],
-                                                  },
-                                                ],
-                                              },
-                                              {
-                                                type: '}',
-                                                value: '}',
-                                                children: [],
-                                              },
-                                            ],
-                                          },
-                                        ],
-                                      },
-                                    ],
-                                  },
-                                ],
-                              },
-                              {
-                                type: '}',
-                                value: '}',
-                                children: [],
                               },
                             ],
                           },
@@ -850,355 +1286,51 @@ test.skip('should parse simple program with arrodeia correctly', () => {
                         children: [
                           {
                             type: 'declrstrct',
-                            value: "amostra'",
+                            value: 'id assignoperator VOV arithmetic ;',
                             children: [
                               {
-                                type: "amostra'",
-                                value: 'amostra ( amostravar',
-                                children: [
-                                  {
-                                    type: 'amostra',
-                                    value: 'amostra',
-                                    children: [],
-                                  },
-                                  {
-                                    type: '(',
-                                    value: '(',
-                                    children: [],
-                                  },
-                                  {
-                                    type: 'amostravar',
-                                    value: "stringliteral amostravar'",
-                                    children: [
-                                      {
-                                        type: 'stringliteral',
-                                        value: '"%p valores positivos\\n"',
-                                        children: [],
-                                      },
-                                      {
-                                        type: "amostravar'",
-                                        value: ', amostravar',
-                                        children: [
-                                          {
-                                            type: ',',
-                                            value: ',',
-                                            children: [],
-                                          },
-                                          {
-                                            type: 'amostravar',
-                                            value: "id amostravar'",
-                                            children: [
-                                              {
-                                                type: 'id',
-                                                value: 'N',
-                                                children: [],
-                                              },
-                                              {
-                                                type: "amostravar'",
-                                                value: ') ;',
-                                                children: [
-                                                  {
-                                                    type: ')',
-                                                    value: ')',
-                                                    children: [],
-                                                  },
-                                                  {
-                                                    type: ';',
-                                                    value: ';',
-                                                    children: [],
-                                                  },
-                                                ],
-                                              },
-                                            ],
-                                          },
-                                        ],
-                                      },
-                                    ],
-                                  },
-                                ],
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: 'vorta',
-        value: 'vorta',
-        children: [],
-      },
-      {
-        type: ';',
-        value: ';',
-        children: [],
-      },
-      {
-        type: '}',
-        value: '}',
-        children: [],
-      },
-      {
-        type: ';',
-        value: ';',
-        children: [],
-      },
-    ],
-  }
-
-  const result = semanticAnalyzer(ASTTree)
-
-  expect(result).toEqual('Accepted')
-})
-
-test.skip('should parse simple program with one operation correctly', () => {
-  const ASTTree = {
-    type: 'S',
-    value: 'pila dai ( ) { expr vorta ; } ;',
-    children: [
-      {
-        type: 'pila',
-        value: 'pila',
-        children: [],
-      },
-      {
-        type: 'dai',
-        value: 'dai',
-        children: [],
-      },
-      {
-        type: '(',
-        value: '(',
-        children: [],
-      },
-      {
-        type: ')',
-        value: ')',
-        children: [],
-      },
-      {
-        type: '{',
-        value: '{',
-        children: [],
-      },
-      {
-        type: 'expr',
-        value: 'declrstrct',
-        children: [
-          {
-            type: 'declrstrct',
-            value: 'id assignoperator VOV arithmetic ;',
-            children: [
-              {
-                type: 'id',
-                value: 'N',
-                children: [],
-              },
-              {
-                type: 'assignoperator',
-                value: '=',
-                children: [],
-              },
-              {
-                type: 'VOV',
-                value: 'id',
-                children: [
-                  {
-                    type: 'id',
-                    value: 'N',
-                    children: [],
-                  },
-                ],
-              },
-              {
-                type: 'arithmetic',
-                value: 'arithmeticoperator VOV',
-                children: [
-                  {
-                    type: 'arithmeticoperator',
-                    value: '+',
-                    children: [],
-                  },
-                  {
-                    type: 'VOV',
-                    value: 'int',
-                    children: [
-                      {
-                        type: 'int',
-                        value: '1',
-                        children: [],
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                type: ';',
-                value: ';',
-                children: [],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: 'vorta',
-        value: 'vorta',
-        children: [],
-      },
-      {
-        type: ';',
-        value: ';',
-        children: [],
-      },
-      {
-        type: '}',
-        value: '}',
-        children: [],
-      },
-      {
-        type: ';',
-        value: ';',
-        children: [],
-      },
-    ],
-  }
-
-  const result = semanticAnalyzer(ASTTree)
-
-  expect(result).toEqual('Accepted')
-})
-
-test.skip('should parse simple program declaring vars correctly', () => {
-  const ASTTree = {
-    type: 'S',
-    value: 'pila dai ( ) { expr vorta ; } ;',
-    children: [
-      {
-        type: 'pila',
-        value: 'pila',
-        children: [],
-      },
-      {
-        type: 'dai',
-        value: 'dai',
-        children: [],
-      },
-      {
-        type: '(',
-        value: '(',
-        children: [],
-      },
-      {
-        type: ')',
-        value: ')',
-        children: [],
-      },
-      {
-        type: '{',
-        value: '{',
-        children: [],
-      },
-      {
-        type: 'expr',
-        value: 'declrstrct expr',
-        children: [
-          {
-            type: 'declrstrct',
-            value: 'declrvar',
-            children: [
-              {
-                type: 'declrvar',
-                value: 'tipo id maisvar',
-                children: [
-                  {
-                    type: 'tipo',
-                    value: 'pila',
-                    children: [
-                      {
-                        type: 'pila',
-                        value: 'pila',
-                        children: [],
-                      },
-                    ],
-                  },
-                  {
-                    type: 'id',
-                    value: 'VEZES',
-                    children: [],
-                  },
-                  {
-                    type: 'maisvar',
-                    value: "atribuir maisvar'",
-                    children: [
-                      {
-                        type: 'atribuir',
-                        value: "assignoperator atribuir'",
-                        children: [
-                          {
-                            type: 'assignoperator',
-                            value: '=',
-                            children: [],
-                          },
-                          {
-                            type: "atribuir'",
-                            value: 'int',
-                            children: [
-                              {
-                                type: 'int',
-                                value: '0',
+                                type: 'id',
+                                value: 'A',
                                 children: [],
                               },
-                            ],
-                          },
-                        ],
-                      },
-                      {
-                        type: "maisvar'",
-                        value: ", id atribuir maisvar'",
-                        children: [
-                          {
-                            type: ',',
-                            value: ',',
-                            children: [],
-                          },
-                          {
-                            type: 'id',
-                            value: 'N',
-                            children: [],
-                          },
-                          {
-                            type: 'atribuir',
-                            value: "assignoperator atribuir'",
-                            children: [
                               {
                                 type: 'assignoperator',
                                 value: '=',
                                 children: [],
                               },
                               {
-                                type: "atribuir'",
+                                type: 'VOV',
                                 value: 'int',
                                 children: [
                                   {
                                     type: 'int',
-                                    value: '0',
+                                    value: '1',
                                     children: [],
                                   },
                                 ],
                               },
-                            ],
-                          },
-                          {
-                            type: "maisvar'",
-                            value: ';',
-                            children: [
+                              {
+                                type: 'arithmetic',
+                                value: 'arithmeticoperator VOV',
+                                children: [
+                                  {
+                                    type: 'arithmeticoperator',
+                                    value: '+',
+                                    children: [],
+                                  },
+                                  {
+                                    type: 'VOV',
+                                    value: 'int',
+                                    children: [
+                                      {
+                                        type: 'int',
+                                        value: '1',
+                                        children: [],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
                               {
                                 type: ';',
                                 value: ';',
@@ -1210,44 +1342,10 @@ test.skip('should parse simple program declaring vars correctly', () => {
                       },
                     ],
                   },
-                ],
-              },
-            ],
-          },
-          {
-            type: 'expr',
-            value: 'declrstrct',
-            children: [
-              {
-                type: 'declrstrct',
-                value: 'declrvar',
-                children: [
                   {
-                    type: 'declrvar',
-                    value: 'tipo id ;',
-                    children: [
-                      {
-                        type: 'tipo',
-                        value: 'trocado',
-                        children: [
-                          {
-                            type: 'trocado',
-                            value: 'trocado',
-                            children: [],
-                          },
-                        ],
-                      },
-                      {
-                        type: 'id',
-                        value: 'A',
-                        children: [],
-                      },
-                      {
-                        type: ';',
-                        value: ';',
-                        children: [],
-                      },
-                    ],
+                    type: '}',
+                    value: '}',
+                    children: [],
                   },
                 ],
               },
@@ -1278,124 +1376,9 @@ test.skip('should parse simple program declaring vars correctly', () => {
     ],
   }
 
-  const result = semanticAnalyzer(ASTTree)
-
-  expect(result).toEqual('Accepted')
-})
-
-test.skip('should parse simple program and create a AST', () => {
-  const ASTTree = {
-    type: 'S',
-    value: 'pila dai ( ) { expr vorta ; } ;',
-    children: [
-      {
-        type: 'pila',
-        value: 'pila',
-        children: [],
-      },
-      {
-        type: 'dai',
-        value: 'dai',
-        children: [],
-      },
-      {
-        type: '(',
-        value: '(',
-        children: [],
-      },
-      {
-        type: ')',
-        value: ')',
-        children: [],
-      },
-      {
-        type: '{',
-        value: '{',
-        children: [],
-      },
-      {
-        type: 'expr',
-        value: 'declrstrct',
-        children: [
-          {
-            type: 'declrstrct',
-            value: 'id assignoperator VOV arithmetic ;',
-            children: [
-              {
-                type: 'id',
-                value: 'N',
-                children: [],
-              },
-              {
-                type: 'assignoperator',
-                value: '=',
-                children: [],
-              },
-              {
-                type: 'VOV',
-                value: 'id',
-                children: [
-                  {
-                    type: 'id',
-                    value: 'N',
-                    children: [],
-                  },
-                ],
-              },
-              {
-                type: 'arithmetic',
-                value: 'arithmeticoperator VOV',
-                children: [
-                  {
-                    type: 'arithmeticoperator',
-                    value: '+',
-                    children: [],
-                  },
-                  {
-                    type: 'VOV',
-                    value: 'int',
-                    children: [
-                      {
-                        type: 'int',
-                        value: '1',
-                        children: [],
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                type: ';',
-                value: ';',
-                children: [],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: 'vorta',
-        value: 'vorta',
-        children: [],
-      },
-      {
-        type: ';',
-        value: ';',
-        children: [],
-      },
-      {
-        type: '}',
-        value: '}',
-        children: [],
-      },
-      {
-        type: ';',
-        value: ';',
-        children: [],
-      },
-    ],
+  try {
+    semanticAnalyzer(ASTTree)
+  } catch (error) {
+    expect(error).toEqual('Rejected Error: Type mismatch in logical operation. Expected boolean, found char.')
   }
-  const result = semanticAnalyzer(ASTTree)
-
-  expect(result).toEqual('Accepted')
 })
